@@ -15,11 +15,11 @@ interface FontClasses {
   quicksand: string;
 }
 
-const useFont = (): FontClasses => {
+const getFonts = (): FontClasses => {
   return {
     oswald: oswald.className,
     quicksand: quicksand.className,
   };
 };
 
-export default useFont;
+export default getFonts;

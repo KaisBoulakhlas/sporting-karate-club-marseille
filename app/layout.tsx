@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import useFont from "@/hooks/useFont";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/_index.scss";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/lib/auth";
+import getFonts from "@/hooks/useFont";
 
 export const metadata: Metadata = {
   title: "Sporting Karaté Club",
@@ -16,7 +16,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { quicksand } = useFont();
+  const { quicksand } = getFonts();
   const session = await auth();
   return (
     <html lang="fr">
