@@ -1,10 +1,5 @@
 "use client";
 import React, { Fragment } from "react";
-import ImageComponent from "@/components/UI/ImageComponent";
-import { images } from "@/constants/images";
-import Content from "../UI/Content";
-import useFadeAnimation from "@/hooks/useFadeAnimation";
-import { motion } from "framer-motion";
 import AnimatedSection from "../UI/animations/AnimatedSection";
 
 const Presentation: React.FC = () => {
@@ -26,7 +21,7 @@ const Presentation: React.FC = () => {
             (13013).
           </Fragment>
         }
-        imageSrc={images.notreClub}
+        imageSrc="/images/notreclub.webp"
         imageAlt="Notre club"
         imageFadeDirection="left"
         textFadeDirection="right"
@@ -48,10 +43,10 @@ const Presentation: React.FC = () => {
             traditionnelle orientale, ce qui le rend accessible à tous.
           </Fragment>
         }
-        imageSrc={images.wadoryu}
+        imageSrc="/images/wadoryu.webp"
         imageAlt="Notre style"
-        imageFadeDirection="right" // L'image vient de la droite
-        textFadeDirection="left" // Le texte vient de la gauche
+        imageFadeDirection="right"
+        textFadeDirection="left"
       />
     </>
   );

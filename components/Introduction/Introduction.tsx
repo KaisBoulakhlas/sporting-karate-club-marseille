@@ -2,7 +2,6 @@
 import React, { Fragment } from "react";
 import ImageComponent from "@/components/UI/ImageComponent";
 import Content from "@/components/UI/Content";
-import { images } from "@/constants/images";
 import { motion } from "framer-motion";
 import useFadeAnimation from "@/hooks/useFadeAnimation";
 import AnimatedSection from "../UI/animations/AnimatedSection";
@@ -38,7 +37,7 @@ const Introduction: React.FC = () => {
           signifie le chemin. Par conséquent, Karate-Do.
         </Fragment>
       }
-      imageSrc={images.funakoshi}
+      imageSrc="/images/funakoshi.webp"
       imageAlt="Le karaté, c'est quoi?"
       imageFadeDirection="left"
       textFadeDirection="right"

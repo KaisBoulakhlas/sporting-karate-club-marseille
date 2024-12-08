@@ -26,7 +26,7 @@ const Trainer: React.FC<TrainerProps> = ({
   reversed,
   index,
 }) => {
-  const direction = index % 2 === 0 ? "left" : "right";
+  const direction = index && index % 2 === 0 ? "left" : "right";
 
   const bounceControls = useAnimation();
 
