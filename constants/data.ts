@@ -9,7 +9,7 @@ import {
   FaRegHeart,
 } from 'react-icons/fa'
 
-import { images } from "@/constants/images";
+// import { images } from "@/constants/images";
 import { BenefitsProps, GalleryItemProps, OpeningHoursByCategory, OpeningHoursDataType, Post, PricingPlanProps, TrainerProps } from '@/types/types';
 import { Location } from '@/components/Map/MapComponent';
 import { UserRole } from '@prisma/client';
