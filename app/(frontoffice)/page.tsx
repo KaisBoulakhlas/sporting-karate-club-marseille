@@ -7,20 +7,15 @@ import Presentation from "@/components/Presentation/Presentation";
 import PricingPlanContainer from "@/components/PricingPlan/PricingPlanContainer";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import Trainers from "@/components/Trainers/Trainers";
+import { getLatestPosts } from "@/hooks/useLatestPosts";
 
-export default function Home() {
-  // const fetchArticles = async () => {
-  //   const articles = await fetch("http://localhost:3000/api/posts/latest").then(
-  //     (response) => response.json()
-  //   );
-  //   console.log(articles);
-  // };
-  // fetchArticles();
+export default async function Home() {
+  const posts = await getLatestPosts();
   return (
     <main>
       <Banner />
       <Introduction />
-      <LatestPosts />
+      <LatestPosts posts={posts} />
       <Benefits />
       <Presentation />
       <Trainers />

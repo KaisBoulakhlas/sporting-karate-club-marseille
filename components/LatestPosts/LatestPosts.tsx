@@ -1,12 +1,9 @@
-// app/components/LatestPosts.tsx
 import React from "react";
 import Title from "../UI/Title";
-import { getLatestPosts } from "@/hooks/useLatestPosts";
 import PostComponent from "../Post/Post";
+import { Post } from "@/types/types";
 
-const LatestPosts = async () => {
-  const posts = await getLatestPosts();
-
+const LatestPosts = ({ posts }: { posts: Post[] }) => {
   return (
     <div className="posts">
       <Title title="Nos derniers articles" />

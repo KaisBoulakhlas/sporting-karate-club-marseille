@@ -7,8 +7,6 @@ import TableSearch from "@/components/UI/Admin/TableSearch";
 import Pagination from "@/components/UI/Admin/Pagination";
 import { getPaginatedItems } from "@/hooks/admin/usePaginationItems";
 
-const ITEM_PER_PAGE = 3;
-
 const BlogPage = async ({
   searchParams,
 }: {
