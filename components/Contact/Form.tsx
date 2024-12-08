@@ -20,9 +20,9 @@ const Form = () => {
       submitContactForm(data)
         .then(async (data) => {
           if (data?.error) {
-            reset();
             toast.error(data?.error);
           } else {
+            reset();
             toast.success("Formulaire envoyé avec succès !");
           }
         })
