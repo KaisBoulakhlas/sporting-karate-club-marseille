@@ -1,0 +1,36 @@
+.postpage__section {
+    padding:3rem;
+    margin: 100px auto auto auto;
+    display:flex;
+    align-items: center;
+    flex-direction:column;
+    gap:2rem;
+    text-align:center;
+    max-width:600px;
+}
+
+.postpage__containerImage {
+    width: 100%;
+    height: auto;
+}
+
+.postpage__separator {
+    height:1px;
+    width:100%;
+    background:#4b5563;
+}
+.postpage__title {
+    @include desktop-xl{
+        font-size:4rem;
+    }
+}
+
+.postpage__content, .postpage__date, .postpage__meta {
+    color:#4b5563;
+    font-weight:500;
+}
+
+.postpage__content{
+    line-height:1.85rem;
+    text-align:left;
+}

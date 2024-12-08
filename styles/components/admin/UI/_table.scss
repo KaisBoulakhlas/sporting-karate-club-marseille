@@ -1,0 +1,11 @@
+.table {
+    width: 100%; // w-full
+    margin-top: 1rem; // mt-4
+    border-collapse: collapse;
+    &__header {
+      color: #6b7280; // text-gray-500
+      text-align: left;
+      font-size: 0.875rem; // text-sm
+    }
+  }
+  

@@ -1,0 +1,37 @@
+%flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+%container {
+  @extend %flexbox;
+  @include desktop-xl {
+    padding: 5rem;
+  }
+  @include tablet-lg {
+    padding: 2rem;
+  }
+  padding: 2rem 1rem;
+
+}
+
+%arrow-slider{
+  border:1px solid rgba(48, 48, 56);
+  transition:0.2s ease;
+  @extend %flexbox;
+  cursor:pointer;
+  padding:0.25rem;
+  border-radius:50%;
+
+  &.disabled {
+    color: grey;
+    border:1px solid grey;
+    pointer-events: none;
+  }
+
+  &:hover{
+      background-color: rgba(48, 48, 56, 0.1);
+  }
+}

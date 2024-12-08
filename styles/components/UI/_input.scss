@@ -1,0 +1,35 @@
+.input-wrapper {
+    display: flex;
+    width:100%;
+    flex-direction: column;
+    position:relative;
+    align-items:flex-start;
+    margin-top:1rem;
+    gap:0.5rem;
+    
+    label {
+        font-size: 0.75rem;
+        color: #6b7280;
+    }
+}
+
+.input, .textarea {
+    border:1px solid lightgray;
+    border-radius:10px;
+    outline:0;
+    width:100%;
+    padding: 0.75rem 0.85rem;
+    transition:0.3s ease-in;
+
+    &:focus {
+        border:1px solid $secondary-color;
+    }
+
+    &::placeholder{
+        color:lightgray;
+    }
+}
+.textarea {
+    font-family: inherit;
+    resize: none;
+}

@@ -1,0 +1,15 @@
+.content {
+  text-align: center;
+  flex: 2;
+  
+  // &__title {
+  //   margin-bottom: 1.5rem;
+  //   font-weight: 700;
+  //   font-size: clamp(1.5rem, 1vw + 1rem, 2.5rem);
+  // }
+
+  &__desc {
+    font-size: clamp(1rem, 0.75vw + 0.5rem, 1.5rem);
+    line-height: clamp(1.75rem, 2vw + 1rem, 3.5rem);
+  }
+}

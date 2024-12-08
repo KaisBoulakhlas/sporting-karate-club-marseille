@@ -1,0 +1,36 @@
+.gallery-form__preview {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #f9fafb;
+  
+    & > .gallery-form__image-preview {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 0.5rem;
+      object-fit: cover;
+    }
+  
+    & > .gallery-form__video-preview {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 0.5rem;
+      outline: none;
+  
+      &::-webkit-media-controls {
+        margin: 0 auto;
+      }
+
+      &::after {
+        content: "Vidéo non prise en charge.";
+        display: block;
+        text-align: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.5rem;
+      }
+    }
+  }

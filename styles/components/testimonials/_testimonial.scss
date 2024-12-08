@@ -1,0 +1,30 @@
+.testimonial {
+    background-color: white;
+    padding: 1rem;
+    text-align: center;
+    min-width: 100%;
+    min-height: 385px;
+    box-shadow:0 0 4px 0 rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: transform 0.5s ease-in-out; 
+  
+    &__fullname {
+      font-weight: 800;
+      font-size:1.25rem;
+      text-transform: uppercase;
+    }
+  
+    &__commentary {
+      line-height: 1.85rem;
+    }
+  
+    svg {
+      color: #333;
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+  }

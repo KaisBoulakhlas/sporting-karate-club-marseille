@@ -1,0 +1,102 @@
+.pricing {
+    border-radius:10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+
+    @include tablet-lg {
+        min-width:320px;
+    }
+
+    @include desktop-xl {
+        min-width:400px;
+    }
+
+    &__container__one{
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        gap:0.25rem;
+        padding:2rem;
+    }
+
+    &__price {
+        font-size:3rem;
+        font-weight:bold;
+
+        
+        @include tablet-lg {
+            font-size:4rem;
+        }
+
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-weight:bold;
+        letter-spacing: 1px;
+        color:#002133;
+    }
+
+    &__description {
+        color:#4b5563;
+        font-weight:500;
+    }
+
+    &__separator {
+        background-image: linear-gradient(315deg, #bbffff, #FFFFFF);
+        height:1px;
+        width:100%;
+    }
+
+    &__container__two {
+        display:flex;
+        flex-direction: column;
+        gap:1rem;
+        align-items:flex-start;
+        padding:2rem;
+    }
+
+    &__benefit {
+        color:#4b5563;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size:0.85rem;
+
+        svg {
+            font-size:1rem;
+        }
+    }
+    &__button-wrapper {
+        min-height: 75px;
+        width: 100%;
+    }
+
+    &__button {
+        color: #009e9e;
+        padding: 1rem;
+        display: inline-block;
+        margin-top: 1rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        width: 100%;
+        border-radius: 5px;
+        border: 0;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 4px solid #009e9e;
+        background-image: linear-gradient(315deg, #bbffff, #FFFFFF);
+        outline: none;
+        box-shadow: 0 3px 5px 0 #bb8a8a66;
+        transition: 0.3s;
+        will-change: transform; 
+
+        &:not(:disabled):hover {
+            box-shadow: 0 0 rgba(0, 0, 0, 0.4) !important;
+            border-bottom-width: 2px !important;
+            transform: translate3d(0px, 2px, 0px) !important;
+        }
+    }
+
+}

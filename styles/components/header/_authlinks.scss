@@ -1,0 +1,68 @@
+.auth {
+  z-index: 999;
+  flex: 1;
+  margin: 0;
+  gap: 20px;
+  display:none;
+  position: relative;
+  height: 85%;
+  transition: 0.2s ease-in;
+  background-color:transparent;
+  padding:1rem;
+
+  &--scrolled {
+    height: 82% ;
+  }
+
+  @include tablet-lg {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    &::after {
+      width: 0;
+      height: 0;
+      border-top: 14px solid $secondary-color;
+      border-left: 30px solid transparent;
+      content: '';
+      z-index: -5;
+      position: absolute;
+      left: -29px;
+      bottom: 0px;
+    }
+  }
+  
+  flex: 1;
+
+
+  &__link {
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+    display: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: white;
+
+    @include tablet-lg {
+      display: block;
+    }
+  }
+
+  &__toggle {
+    display: block;
+    color: $primary-color;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: 0.2s ease-in;
+
+    &:hover {
+      color: skyblue;
+    }
+
+    @include tablet-lg {
+      display: none;
+    }
+  }
+}

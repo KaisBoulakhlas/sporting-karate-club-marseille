@@ -1,0 +1,29 @@
+.header__logo {
+  @extend %flexbox;
+  position: relative;
+  background-color: transparent;
+  padding:1rem; 
+  flex: 1 1;
+  height: 85%;
+  transition: 0.2s ease-in;
+  
+  &--scrolled {
+    height: 82%;
+  }
+
+  @include tablet-lg {
+    background-color: $primary-color;
+    padding: 0 1rem;
+    &::after {
+      width: 0;
+      height: 0;
+      border-top: 15px solid #009e9e;
+      border-right: 30px solid transparent;
+      content: '';
+      z-index: -5;
+      position: absolute;
+      right: -29px;
+      bottom: 0px;
+    }
+  }
+}

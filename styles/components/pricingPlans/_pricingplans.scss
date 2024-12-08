@@ -1,0 +1,18 @@
+.pricingPlans{
+    @extend %container;
+    flex-direction:column;
+    gap:2rem;
+    overflow:hidden;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        margin:auto;
+        justify-content: center;
+        gap:2rem;
+
+        @include tablet-lg {
+            flex-direction: row;
+        }
+    }
+}

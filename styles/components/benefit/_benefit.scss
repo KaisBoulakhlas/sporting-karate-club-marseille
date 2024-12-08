@@ -1,0 +1,98 @@
+.benefits {
+  @extend %container;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  gap:2rem;
+  background-image: url('../../../public/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+  }
+
+  &__container {
+    @extend %flexbox;
+    gap:2rem;
+    margin: auto auto 2rem auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .benefitCard {
+    @extend %flexbox;
+    flex-direction: column;
+    overflow: hidden;
+    max-width: 250px;
+    min-width: 250px;
+    border: 1px solid #bfff;
+    user-select:none;
+    gap:2rem;
+    height: 250px;
+    padding: 1rem;
+    background: transparent;
+    backdrop-filter: blur(7px);
+    transition: ease-in 0.2s;
+    position: relative;
+    z-index: 2; 
+
+    &__icon {
+      font-size: 3rem;
+      &.icon-red {
+        color: red;
+      }
+
+      &.icon-gold {
+        color: gold;
+      }
+
+      &.icon-blue {
+        color: #548686;
+      }
+
+      &.icon-black {
+        color: black;
+      }
+    }
+
+    &__desc {
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color:#bfff;
+    }
+
+    &::before{
+      position: fixed;
+      content: "";
+      box-shadow: 0 0 100px 40px #cfd4f8c0;
+      top: -10%;
+      left: -100%;
+      transform: rotate(-45deg);
+      height: 60rem;
+      transition: .7s all;
+    }
+    &:hover{
+      border: 1px solid #ffffff44;
+      box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.6666666667);
+      filter: brightness(1.3);
+      &::before{
+        filter: brightness(.5);
+        top: -100%;
+        left: 200%;
+      }
+    }
+  }
+}

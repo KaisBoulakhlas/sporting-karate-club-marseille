@@ -1,0 +1,39 @@
+.animated-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow: hidden;
+    @extend %container;
+
+    @include tablet-lg {
+      flex-direction: row;
+    }
+  
+    &__content {
+      flex: 2;
+      margin-right: 0;
+      
+      @include tablet-lg {
+        margin-right: 20px;
+      }
+    }
+  
+    &__image {
+      flex: 1;
+      min-width: 250px;
+    }
+  
+    &--reverse {
+      @include tablet-lg {
+        flex-direction: row-reverse;
+      }
+  
+      &__content {
+        @include tablet-lg {
+          margin-right: 0;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  

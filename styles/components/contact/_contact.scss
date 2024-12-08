@@ -1,0 +1,41 @@
+.contact {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 100px auto auto auto;
+    gap:2rem;
+
+    @include desktop-xl {
+        flex-direction: row;
+        padding: 0 1rem 1rem 1rem;
+        margin: 100px 0 auto 0;
+    }
+
+    &__form {
+        @extend %flexbox;
+        gap:1rem;
+        flex:1;
+        flex-direction: column;
+        margin: auto;
+        padding:1rem;
+    }
+
+    &__section {
+        @extend %flexbox;
+        width:100%;
+        gap: 1rem;
+
+        @include desktop-xl {
+            flex-wrap:nowrap;
+        }
+    }
+
+    &__map {
+        min-height:calc(100vh - 160px);
+        flex:1;
+        width:100%;
+        @extend %flexbox;
+    }
+}
+

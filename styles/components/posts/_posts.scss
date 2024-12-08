@@ -1,0 +1,13 @@
+.posts {
+    @extend %container;
+    gap:2rem;
+    flex-direction:column;
+    
+
+    &__container {
+        @extend %flexbox;
+        gap:2rem;
+        margin-bottom:3rem;
+        width:100%;
+    }
+}

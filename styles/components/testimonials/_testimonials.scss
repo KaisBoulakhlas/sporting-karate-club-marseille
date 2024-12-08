@@ -1,0 +1,43 @@
+.testimonials {
+    @extend %container;
+    flex-direction: column;
+    gap:2rem;
+    
+    &__description {
+        color:#4b5563;
+        text-align:center;
+        font-size:2rem;
+    }
+
+    &__container {
+        @extend %container;
+        max-width:90vw;
+
+        flex-direction: column;
+        
+        @include tablet-lg {
+            max-width:auto;
+        }
+
+        @include desktop-xl {
+            padding:0;
+        }
+    }
+
+
+    &__slider {
+        width:100%;
+        justify-content: flex-start;
+        display:flex;
+        align-items:center;
+
+        @include tablet-lg {
+            width:auto;
+        }
+    }
+
+    &__image {
+        max-width: 400px;
+        min-width:250px;
+    }
+}

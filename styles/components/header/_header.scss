@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  z-index: 999;
+  height: 100px;
+  transition: height 0.3s ease-in-out; 
+
+  @include tablet-lg {
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &--scrolled {
+    height: 120px;
+    background-color:black;
+  }
+
+  @include tablet-lg {
+    &--scrolled {
+      background-color:transparent;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@import '_variables.scss';
+
+// Small devices
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}
+
+
+
+// Medium devices (tablets)
+@mixin phone-sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+// Large devices (desktops)
+@mixin tablet-lg {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+// Extra large devices (large desktops)
+@mixin desktop-xl {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Extra extra large devices (very large desktops)
+@mixin desktop-xxl {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+// Beyond 2xl (very large desktops)
+@mixin beyond-2xl {
+  @media (min-width: 1536px) {
+    @content;
+  }
+}
+
+@mixin container($width, $height) {
+  width: $width;
+  height: $height;
+  margin: 0 auto; 
+}
+

@@ -1,0 +1,39 @@
+.blogpage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; // Espace entre les sections
+    padding: 2rem;
+  
+    &__search {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+  
+      @media (min-width: 768px) {
+        justify-content: flex-end;
+      }
+    }
+  
+    &__container {
+      display: flex;
+      flex-wrap: wrap; // Permet de gérer plusieurs lignes
+      justify-content: space-between; // Égalise l'espace entre les articles
+      gap: 1.5rem; // Espace entre les articles
+  
+      & > * {
+        flex: 1 1 calc(33.333% - 1.5rem); // Trois articles par ligne, avec espace entre eux
+        max-width: calc(33.333% - 1.5rem);
+  
+        @media (max-width: 1024px) {
+          flex: 1 1 calc(50% - 1.5rem); // Deux articles par ligne sur les écrans moyens
+          max-width: calc(50% - 1.5rem);
+        }
+  
+        @media (max-width: 768px) {
+          flex: 1 1 100%; // Un article par ligne sur les petits écrans
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,21 @@
+.table-column {
+    &--students,
+    &--phone,
+    &--address {
+      display: none;
+    }
+  
+    @media (min-width: 768px) { // md breakpoint
+      &--students {
+        display: table-cell;
+      }
+    }
+  
+    @media (min-width: 1024px) { // lg breakpoint
+      &--phone,
+      &--address {
+        display: table-cell;
+      }
+    }
+  }
+  

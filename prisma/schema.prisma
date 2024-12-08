@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  ADHERENT
+  PUBLISHER
+}
+
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String
+  firstName             String
+  email                 String                 @unique
+  image                 String?
+  password              String
+  role                  UserRole               @default(ADHERENT)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+}
+
+model Contact {
+  id          String                 @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String 
+  phone       String?
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model Post {
+  id           String                 @id @default(cuid())
+  title        String
+  summary      String
+  content      String
+  imageUrl     String
+  publishedAt  DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  author       String
+  slug         String   @unique
+}
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  src         String
+  type        String
+  title       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

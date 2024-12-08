@@ -1,0 +1,25 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 100px auto auto auto;
+    gap: 2rem;
+
+    @include desktop-xl {
+        flex-direction: row;
+        padding: 1rem;
+        margin: 100px auto auto auto;
+        max-width: 350px;
+    }
+
+    &__form {
+        @extend %flexbox;
+        gap:1rem;
+        flex:1;
+        flex-direction: column;
+        margin: auto;
+        padding:1rem;
+    }
+
+}
