@@ -1,12 +1,8 @@
 import React from "react";
-import ImageComponent from "@/components/UI/ImageComponent";
-import { images } from "@/constants/images";
 import Title from "@/components/UI/Title";
 import Slider from "@/components/UI/Slider";
-import useFont from "@/hooks/useFont";
 
 const Testimonials: React.FC = () => {
-  const { oswald } = useFont();
   return (
     <div className="testimonials">
       <Title title="Nos témoignages" />

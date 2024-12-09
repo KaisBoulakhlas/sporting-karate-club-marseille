@@ -1,7 +1,6 @@
-import useFont from "@/hooks/useFont";
 import { TestimonialProps } from "@/types/types";
 import React from "react";
-import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { FaQuoteRight } from "react-icons/fa";
 
 const Testimonial: React.FC<TestimonialProps> = ({ fullname, commentary }) => {
   return (
