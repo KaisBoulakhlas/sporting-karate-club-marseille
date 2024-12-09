@@ -10,7 +10,7 @@ import Trainers from "@/components/Trainers/Trainers";
 import { getLatestPosts } from "@/hooks/useLatestPosts";
 
 export default async function Home() {
-  const posts = await getLatestPosts();
+  const posts = (await getLatestPosts()) || [];
   return (
     <main>
       <Banner />
