@@ -19,6 +19,9 @@ const Slider: React.FC = () => {
   const [touchMoveX, setTouchMoveX] = useState<number | null>(null);
   const [isSwiping, setIsSwiping] = useState(false);
 
+  const intermediateThreshold = 10; // Pourcentage de largeur visible pour déclencher un changement immédiat
+  const swipeThreshold = 75; // Seuil pour compléter le swipe
+
   const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
     if ("touches" in e) {
       touchStartX.current = e.touches[0].clientX;
@@ -31,10 +34,19 @@ const Slider: React.FC = () => {
 
   const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
     if (touchStartX.current !== null) {
-      if ("touches" in e) {
-        setTouchMoveX(e.touches[0].clientX);
-      } else {
-        setTouchMoveX(e.clientX);
+      const currentX = "touches" in e ? e.touches[0].clientX : e.clientX;
+      setTouchMoveX(currentX);
+
+      // Détection d'un seuil intermédiaire
+      const distance = touchStartX.current - currentX;
+      const swipePercentage = (distance / window.innerWidth) * 100;
+
+      if (swipePercentage > intermediateThreshold && !isNextDisabled) {
+        handleNextClick();
+        handleTouchEnd(); // Terminer le swipe
+      } else if (swipePercentage < -intermediateThreshold && !isPrevDisabled) {
+        handlePrevClick();
+        handleTouchEnd(); // Terminer le swipe
       }
     }
   };
@@ -43,11 +55,10 @@ const Slider: React.FC = () => {
     if (touchStartX.current === null || touchMoveX === null) return;
 
     const distance = touchStartX.current - touchMoveX;
-    const swipeThreshold = 75; // Réduire légèrement le seuil pour détecter plus facilement un swipe
 
     setIsSwiping(false);
 
-    // Si le swipe est suffisamment grand, on passe à la slide suivante ou précédente
+    // Vérification du seuil pour compléter le swipe
     if (distance > swipeThreshold) {
       handleNextClick();
     } else if (distance < -swipeThreshold) {
@@ -85,8 +96,7 @@ const Slider: React.FC = () => {
           onMouseDown={handleTouchStart}
           onMouseMove={handleTouchMove}
           onMouseUp={handleTouchEnd}
-          onMouseLeave={handleTouchEnd} // Handle case where swipe ends outside the element
-        >
+          onMouseLeave={handleTouchEnd}>
           <div
             className="slider__inner"
             style={{

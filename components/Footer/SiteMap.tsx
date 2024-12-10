@@ -12,7 +12,7 @@ const SiteMap: React.FC = () => {
         {links.map((item, index) => (
           <RoleGate key={item.title} allowedRoles={item.visible}>
             <li key={index}>
-              <Link href={`/${item.link}`}>{item.title}</Link>
+              <Link href={item.link}>{item.title}</Link>
             </li>
           </RoleGate>
         ))}

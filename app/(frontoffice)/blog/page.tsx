@@ -6,6 +6,12 @@ import { db } from "@/lib/db";
 import TableSearch from "@/components/UI/Admin/TableSearch";
 import Pagination from "@/components/UI/Admin/Pagination";
 import { getPaginatedItems } from "@/hooks/admin/usePaginationItems";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Notre blog contenant tous les articles du club.",
+};
 
 const BlogPage = async ({
   searchParams,

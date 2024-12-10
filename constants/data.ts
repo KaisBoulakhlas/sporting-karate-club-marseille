@@ -21,8 +21,8 @@ export const links = [
     visible:[]
   },
   {
-    title: 'Gallerie',
-    link:'/gallerie',
+    title: 'Galerie',
+    link:'/galerie',
     visible:[]
   },
   {

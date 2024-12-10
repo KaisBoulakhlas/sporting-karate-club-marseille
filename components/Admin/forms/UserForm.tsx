@@ -162,7 +162,8 @@ const UserForm = ({
               uploadPreset="sportingkarate"
               options={{
                 folder: "users",
-                resourceType: "auto",
+                resourceType: "image",
+                clientAllowedFormats: ["png", "jpeg", "jpg"],
               }}
               onSuccess={(result: any, { widget }) => {
                 setImage(result.info?.secure_url);

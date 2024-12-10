@@ -1,16 +1,21 @@
 "use client";
 import React from "react";
 import { GalleryItemProps, isImageItem, isVideoItem } from "@/types/types";
-import Image from "next/image";
 import ImageComponent from "../UI/ImageComponent";
 
 interface Props {
   item: GalleryItemProps;
   cnImage?: string;
   cnVideo?: string;
+  showControls?: boolean;
 }
 
-const GalleryItem: React.FC<Props> = ({ item, cnImage, cnVideo }) => {
+const GalleryItem: React.FC<Props> = ({
+  item,
+  cnImage,
+  cnVideo,
+  showControls = false,
+}) => {
   return (
     <div>
       {isImageItem(item) ? (
@@ -22,7 +27,7 @@ const GalleryItem: React.FC<Props> = ({ item, cnImage, cnVideo }) => {
           hasLink={false}
         />
       ) : isVideoItem(item) ? (
-        <video className={cnVideo} controls>
+        <video className={cnVideo} controls={showControls}>
           <source src={item.src} type="video/mp4" />
         </video>
       ) : null}

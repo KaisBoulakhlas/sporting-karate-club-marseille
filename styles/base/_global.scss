@@ -45,3 +45,9 @@ a {
 html {
     scroll-behavior: smooth;
 }
+
+body{
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+}

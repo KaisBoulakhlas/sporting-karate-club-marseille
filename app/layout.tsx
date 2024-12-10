@@ -20,6 +20,38 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="fr">
+      <head>
+        <link rel="icon" href="/images/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/images/apple-touch-icon.png"
+        />
+        <link
+          rel="android-chrome-192x192.png"
+          sizes="192x192"
+          href="/images/android-chrome-192x192.png"
+        />
+        <link
+          rel="android-chrome-192x192.png"
+          sizes="512x512"
+          href="/images/android-chrome-512x512.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/images/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/images/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={quicksand}>
         <SessionProvider session={session}>{children}</SessionProvider>
         <ToastContainer />

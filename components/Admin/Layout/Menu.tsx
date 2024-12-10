@@ -1,7 +1,6 @@
 "use client";
 import { LogoutButton } from "@/components/Login/LogoutButton";
 import RoleGate from "@/components/Login/Role/RoleGate";
-import { useCurrentRole } from "@/hooks/auth/useCurrentRole";
 import { UserRole } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +8,6 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 const Menu: React.FC = () => {
-  const userRole = useCurrentRole();
   const pathname = usePathname();
 
   const menuItems = [

@@ -1,6 +1,6 @@
 "use client";
 import { ModalProps } from "@/types/types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import GalleryItem from "../Gallery/GalleryItem";
 
 const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
@@ -57,6 +57,7 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
           item={item}
           cnImage="modal__image"
           cnVideo="modal__video"
+          showControls={true}
         />
       </div>
       <button

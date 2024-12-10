@@ -20,36 +20,36 @@ async function main() {
 
    const users: User[] = [
     { 
-      name: 'Admin User',
-      firstName:"test",
-      email: 'admin@example.com',
+      name: 'Developer',
+      firstName:"Kais",
+      email: 'kaisboulakhlas9@gmail.com',
       password,
       role: UserRole.ADMIN,
     },
     {
-      name: 'Publisher One',
-      firstName:"test2",
+      name: 'Vuidot',
+      firstName:"Grégory",
+      email: 'gregory.vuidot@gmail.com',
+      password,
+      role: UserRole.ADMIN,
+    },
+    {
+      name: 'Publieur',
+      firstName:"1",
       email: 'publisher1@example.com',
       password,
       role: UserRole.PUBLISHER,
     },
     {
-      name: 'Publisher Two',
-      firstName:"test3",
-      email: 'publisher2@example.com',
-      password,
-      role: UserRole.PUBLISHER,
-    },
-    {
-      name: 'Adherent One',
-      firstName:"test4",
+      name: 'Adherent',
+      firstName:"1",
       email: 'adherent1@example.com',
       password,
       role: UserRole.ADHERENT,
     },
     {
-      name: 'Adherent Two',
-      firstName:"test5",
+      name: 'Adherent',
+      firstName:"2",
       email: 'adherent2@example.com',
       password,
       role: UserRole.ADHERENT,
@@ -61,6 +61,7 @@ async function main() {
   });
 
    console.log('5 utilisateurs ont été créés avec succès');
+
    const galleryItems = [
     { title: 'Image 1', src: '/images/funakoshi.webp', type: 'image' },
     { title: 'Image 2', src: '/images/daniel.webp', type: 'image' },
@@ -69,13 +70,13 @@ async function main() {
     { title: 'Image 4', src: '/images/college-giono.webp', type: 'image' },
     { title: 'Image 5', src: '/images/wadoryu.webp', type: 'image' },
     { title: 'Image 6', src: '/images/teachers.webp', type: 'image' },
-    
   ];
 
   await db.galleryItem.createMany({
     data: galleryItems,
   });
-  console.log('10 items de galerie ont été créés avec succès');
+
+  console.log('Les items de galerie ont été créés avec succès');
 }
 
 main()

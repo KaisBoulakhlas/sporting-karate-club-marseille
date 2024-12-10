@@ -1,7 +1,46 @@
 import ImageComponent from "@/components/UI/ImageComponent";
 import { getPostBySlug } from "@/hooks/usePost";
+import { db } from "@/lib/db";
 import { formatFrenchDateTime } from "@/lib/utils";
-import Image from "next/image";
+import { Metadata } from "next";
+
+export async function generateStaticParams() {
+  const posts = await db.post.findMany({
+    select: { slug: true },
+  });
+
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const postData = await getPostBySlug(params.slug);
+
+  if (!postData) {
+    return {
+      title: "Article non trouvé",
+      description: "L'article que vous cherchez est introuvable.",
+    };
+  }
+
+  return {
+    title: postData.title,
+    description: postData.summary || "Découvrez cet article sur notre site.",
+    openGraph: {
+      title: postData.title,
+      description: postData.summary,
+      images: [
+        {
+          url: postData.imageUrl,
+          alt: postData.title,
+        },
+      ],
+    },
+  };
+}
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
@@ -15,10 +54,6 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       </main>
     );
   }
-
-  const formattedDate = postData.publishedAt
-    ? new Date(postData.publishedAt).toLocaleDateString()
-    : "Date inconnue";
 
   return (
     <main className="postpage__section">

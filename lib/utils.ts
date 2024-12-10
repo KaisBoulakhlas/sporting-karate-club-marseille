@@ -1,6 +1,4 @@
-// import { configureCloudinary } from "./cloudinary";
 import { db } from "./db";
-//import {  } from "next-cloudinary";
 
 export const getUserByEmail = async (email: string) => {
     try {
@@ -54,38 +52,8 @@ export function formatFrenchDateTime(date:Date | undefined): string {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Europe/Paris",
   }).format(parsedDate);
 
   return `${formattedDate}`;
 }
-
-// export async function deleteFromCloudinary(src: string): Promise<{ success: boolean } | { error: string }> {
-//   try {
-//     const cloudinary = configureCloudinary();
-//     const cloudinaryBaseUrl = "https://res.cloudinary.com/";
-//     const isCloudinaryUrl = src.startsWith(cloudinaryBaseUrl);
-
-//     if (!isCloudinaryUrl) {
-//       return { error: "URL non valide pour Cloudinary. Suppression ignorée." };
-//     }
-
-//     const publicIdMatch = src.match(/\/v\d+\/(.+)\.[a-z]+$/);
-    
-//     if (!publicIdMatch) {
-//       return { error: "Impossible d'extraire le publicId de l'URL Cloudinary." };
-//     }
-
-//     const publicId = publicIdMatch[1];
-
-//     const response = await cloudinary.uploader.destroy(publicId);
-
-//     if (response.result !== "ok") {
-//       return { error: `Échec de la suppression : ${response.result}` };
-//     }
-
-//     return { success: true };
-//   } catch (error) {
-//     console.error("Erreur lors de la suppression sur Cloudinary :", error);
-//     return { error: "Impossible de supprimer l'élément de Cloudinary." };
-//   }
-// }

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "email": "email dev --dir app/emails",
-    "vercel-build": "prisma generate && prisma migrate deploy && npx tsx prisma/seed.ts && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

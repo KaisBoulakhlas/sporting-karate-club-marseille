@@ -135,7 +135,8 @@ const PostForm = ({
               uploadPreset="sportingkarate"
               options={{
                 folder: "articles",
-                resourceType: "auto",
+                resourceType: "image",
+                clientAllowedFormats: ["png", "jpeg", "jpg"],
               }}
               onSuccess={(result: any, { widget }) => {
                 setFileSrc(result.info?.secure_url);
