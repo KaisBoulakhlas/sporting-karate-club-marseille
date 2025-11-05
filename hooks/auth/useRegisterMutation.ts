@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signUp } from "@/lib/auth-client";
 import type { User } from "@/lib/auth-better";
 
 interface RegisterPayload {
@@ -28,29 +29,25 @@ export function useRegisterMutation() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/sign-up", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await signUp.email(payload);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        const errorMessage =
-          errorData.message || "Erreur d'inscription";
-        setError(errorMessage);
+      if (response.error) {
+        setError(response.error.message || "Erreur d'inscription");
         return null;
       }
 
-      const data: RegisterResponse = await response.json();
+      if (response.data?.user) {
+        // Auto redirect après inscription réussie
+        router.push("/");
+        router.refresh();
 
-      // Auto redirect après inscription réussie
-      router.push("/");
-      router.refresh();
+        return {
+          user: response.data.user as User,
+          message: "Inscription réussie",
+        };
+      }
 
-      return data;
+      return null;
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Une erreur est survenue";

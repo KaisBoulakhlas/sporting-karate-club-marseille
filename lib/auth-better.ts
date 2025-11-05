@@ -42,7 +42,12 @@ export const auth = betterAuth({
 });
 
 export type Session = typeof auth.$Infer.Session;
-export type User = PrismaUser;
+export type User = PrismaUser & {
+  role?: string;
+};
+
+// Export auth client for use in the browser
+export const authClient = auth;
 
 // Server-side session getter for use in server actions
 export async function getServerSession() {

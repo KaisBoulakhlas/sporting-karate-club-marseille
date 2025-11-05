@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signOut } from "@/lib/auth-client";
 
 export function useLogoutMutation() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,16 +14,10 @@ export function useLogoutMutation() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/sign-out", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await signOut();
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.message || "Erreur de déconnexion");
+      if (response.error) {
+        setError(response.error.message || "Erreur de déconnexion");
         return;
       }
 
