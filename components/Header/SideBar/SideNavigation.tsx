@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/hooks/auth/useAuth";
+import { useLogoutMutation } from "@/hooks/auth/useLogoutMutation";
 import { UserRole } from "@prisma/client";
 import SideMenuItem from "./SideMenuItem";
 import RoleGate from "@/components/Login/Role/RoleGate";
@@ -21,16 +21,15 @@ const variants = {
 };
 
 const SideNavigation = ({ closeSidebar }: { closeSidebar: () => void }) => {
-  const { data: session } = useSession();
-
-  const isLoggedIn = !!session;
+  const { isAuthenticated } = useAuth();
+  const { mutate: logout } = useLogoutMutation();
 
   const links = [
     { title: "Blog", link: "/blog", visible: [] },
     { title: "Gallerie", link: "/gallerie", visible: [] },
     { title: "Cours", link: "/cours", visible: [] },
     { title: "Contact", link: "/contact", visible: [] },
-    ...(isLoggedIn
+    ...(isAuthenticated
       ? [
           {
             title: "Back-office",
@@ -39,7 +38,9 @@ const SideNavigation = ({ closeSidebar }: { closeSidebar: () => void }) => {
           },
           {
             title: "Déconnexion",
-            onClick: () => signOut({ redirectTo: "/login" }),
+            onClick: async () => {
+              await logout();
+            },
             visible: [],
           },
         ]

@@ -1,37 +1,30 @@
 "use client";
 
-import { useTransition } from "react";
 import { LoginFormSchema } from "@/app/schemas/LoginSchema";
-import { login } from "@/actions/login";
 import FormWrapper from "../UI/FormWrapper";
 import Title from "../UI/Title";
 import ButtonComponent from "../UI/ButtonComponent";
 import { useLoginForm } from "@/hooks/useLoginForm";
 import { toast } from "react-toastify";
 import Input from "../UI/Input";
-import { useSession } from "next-auth/react";
+import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
 
 export function LoginForm() {
-  const [isPending, startTransition] = useTransition();
-  const { update } = useSession();
+  const { mutate: login, isLoading, error } = useLoginMutation();
   const { register, handleSubmit, errors, reset, isValid } = useLoginForm();
-  const onSubmit = (values: LoginFormSchema) => {
-    startTransition(() => {
-      login(values)
-        .then(async (data) => {
-          if (data?.error) {
-            reset();
-            toast.error(data?.error);
-          } else {
-            await update();
-            toast.success("Connexion réussie!");
-          }
-        })
-        .catch(() => {
-          reset();
-          toast.error("Erreur lors de la connexion.");
-        });
+
+  const onSubmit = async (values: LoginFormSchema) => {
+    const result = await login({
+      email: values.email,
+      password: values.password,
     });
+
+    if (result) {
+      reset();
+      toast.success("Connexion réussie!");
+    } else if (error) {
+      toast.error(error);
+    }
   };
 
   return (
@@ -54,10 +47,10 @@ export function LoginForm() {
       />
 
       <ButtonComponent
-        text={isPending ? "Connexion en cours..." : "Connexion"}
+        text={isLoading ? "Connexion en cours..." : "Connexion"}
         type="submit"
         className="pricing__button"
-        disabled={isPending || !isValid}
+        disabled={isLoading || !isValid}
         style={{ marginTop: "1rem" }}
       />
     </FormWrapper>

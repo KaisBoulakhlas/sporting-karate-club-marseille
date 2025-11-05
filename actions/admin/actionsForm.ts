@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { getPostById, getUserByEmail, getUserById } from "@/lib/utils";
 import { z } from 'zod';
 import { postSchema } from '@/app/schemas/postFormSchema';
-import { auth } from '@/lib/auth';
+import { getServerSession } from '@/lib/auth-better';
 import { slugify } from '@/lib/slugify';
 import { UserRole } from '@prisma/client';
 import { GalleryFormSchema, galleryItemSchema } from '@/app/schemas/galleryItemSchema';
@@ -13,7 +13,7 @@ import { cloudinaryInstance } from '@/lib/cloudinary';
 
 export const register = async (data: z.infer<typeof userSchema>) => {
   try{ 
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session?.user.role) {
       throw new Error("Accès non autorisé.");
@@ -55,7 +55,6 @@ export const register = async (data: z.infer<typeof userSchema>) => {
         firstName,
         image,
         role,
-        password: hashedPassword,
       },
     });
     
@@ -68,7 +67,7 @@ export const register = async (data: z.infer<typeof userSchema>) => {
 };
 
 export const update = async (data: z.infer<typeof userUpdateSchema>) => {
-  const session = await auth();
+  const session = await getServerSession();
 
   if (!session?.user.role) {
     throw new Error("Accès non autorisé.");
@@ -97,10 +96,6 @@ export const update = async (data: z.infer<typeof userUpdateSchema>) => {
       return { error: "User not found!" };
     }
 
-    const hashedPassword = password
-      ? await bcrypt.hash(password, 10)
-      : existingUser.password;
-
     await db.user.update({
       where: { id },
       data: {
@@ -109,7 +104,6 @@ export const update = async (data: z.infer<typeof userUpdateSchema>) => {
         firstName,
         image: image || null,
         role,
-        password: hashedPassword,
       },
     });
 
@@ -123,7 +117,7 @@ export const update = async (data: z.infer<typeof userUpdateSchema>) => {
 export const deleteUser = async (user: { id: string; image: string }) => {
  
   try {
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session?.user.role) {
       throw new Error("Accès non autorisé.");
@@ -166,7 +160,7 @@ export const deleteUser = async (user: { id: string; image: string }) => {
 export const createPost = async (data: z.infer<typeof postSchema>) => {
   try {
 
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session || !session.user || session.user.role === UserRole.ADHERENT) {
       return { error: "Unauthorized. You must be logged in to create a post." };
@@ -204,7 +198,7 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
 
 export const updatePost = async (data: z.infer<typeof postSchema>) => {
   try {
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session || !session.user || session.user.role === UserRole.ADHERENT) {
       return { error: "Unauthorized. You must be logged in to create a post." };
@@ -236,7 +230,7 @@ export const updatePost = async (data: z.infer<typeof postSchema>) => {
 
 export const deletePost = async (post: { id: string; imageUrl: string }) => {
   try {
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session || !session.user || session.user.role === UserRole.ADHERENT) {
       return { error: "Unauthorized. You must be logged in to create a post." };
@@ -273,7 +267,7 @@ export const deletePost = async (post: { id: string; imageUrl: string }) => {
 
 export async function createGalleryItem(data: GalleryFormSchema) {
 
-  const session = await auth();
+  const session = await getServerSession();
 
   if (!session?.user.role) {
     throw new Error("Accès non autorisé.");
@@ -343,7 +337,7 @@ export async function deleteFromCloudinary(
 export const deleteGalleryItem = async (galleryItem: { id: string; src: string }) => {
   try {
     
-    const session = await auth();
+    const session = await getServerSession();
 
     if (!session?.user.role) {
       throw new Error("Accès non autorisé.");

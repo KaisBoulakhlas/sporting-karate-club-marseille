@@ -3,18 +3,18 @@
 import React from "react";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/hooks/auth/useAuth";
 import { LogoutButton } from "@/components/Login/LogoutButton";
 
 const AuthLink: React.FC<{ handleClick: () => void; scrolled: boolean }> = ({
   handleClick,
   scrolled,
 }) => {
-  const session = useSession();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className={`auth ${scrolled ? "auth--scrolled" : ""}`}>
-      {session.data?.user ? (
+      {isAuthenticated ? (
         <LogoutButton>
           <span className="auth__link">Déconnexion</span>
         </LogoutButton>

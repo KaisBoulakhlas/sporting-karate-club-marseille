@@ -8,6 +8,8 @@ import { User } from "@/types/types";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const UserListPage = async ({
   searchParams,
 }: {

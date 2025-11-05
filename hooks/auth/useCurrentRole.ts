@@ -1,7 +1,9 @@
-import { useSession } from "next-auth/react";
+"use client";
 
-export const useCurrentRole = () => {
-  const session = useSession();
+import { useAuth } from "./useAuth";
+import type { UserRole } from "@prisma/client";
 
-  return session.data?.user.role;
-};
+export function useCurrentRole(): UserRole | null {
+  const { user } = useAuth();
+  return (user?.role as UserRole) || null;
+}

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/_index.scss";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/lib/auth";
 import getFonts from "@/hooks/useFont";
 
 export const metadata: Metadata = {
@@ -17,7 +15,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { quicksand } = getFonts();
-  const session = await auth();
   return (
     <html lang="fr">
       <head>
@@ -53,7 +50,7 @@ export default async function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={quicksand}>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        {children}
         <ToastContainer />
       </body>
     </html>
