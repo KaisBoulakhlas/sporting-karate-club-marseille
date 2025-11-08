@@ -1,58 +1,63 @@
+@import "../../../admin/tokens";
+@import "../../../admin/components";
+
 .dashboard-layout {
-    height: 100vh;
+  height: 100vh;
+  display: flex;
+  background-color: $bg-primary;
+
+  &__sidebar {
+    width: 100%;
+    padding: space("6");
+    background-color: white;
+    border-right: 1px solid $border-light;
+    overflow-y: auto;
     display: flex;
-  
-    &__sidebar {
-      width: 14%;
-      padding: 1rem;
-  
-      @media (min-width: 768px) {
-        width: 8%;
-      }
-      @media (min-width: 1024px) {
-        width: 16%;
-      }
-      @media (min-width: 1280px) {
-        width: 14%;
-      }
+    flex-direction: column;
+
+    @include respond-to("md") {
+      width: 20%;
     }
-  
-    &__logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-  
-      @media (min-width: 1024px) {
-        justify-content: flex-start;
-      }
-    }
-  
-    &__logo-text {
-      display: none;
-      font-weight: bold;
-  
-      @media (min-width: 1024px) {
-        display: block;
-      }
-    }
-  
-    &__main {
-      width: 86%;
-      background-color: #f7f8fa;
-      overflow-y: scroll;
-      display: flex;
-      flex-direction: column;
-  
-      @media (min-width: 768px) {
-        width: 92%;
-      }
-      @media (min-width: 1024px) {
-        width: 84%;
-      }
-      @media (min-width: 1280px) {
-        width: 86%;
-      }
+
+    @include respond-to("lg") {
+      width: 18%;
     }
   }
+
+  &__logo {
+    @include flex-center;
+    gap: space("2");
+    margin-bottom: space("10");
+    padding-bottom: space("6");
+    border-bottom: 1px solid $border-light;
+
+    @include respond-to("lg") {
+      justify-content: flex-start;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  &__logo-text {
+    display: none;
+    @include heading-3;
+    color: $brand-primary;
+    font-weight: font-weight("bold");
+
+    @include respond-to("lg") {
+      display: block;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    background-color: $bg-primary;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
   

@@ -1,90 +1,122 @@
+@import "../../../admin/tokens";
+
 .headerAdmin {
-    display: flex;
+  @include flex-between;
+  padding: space("5") space("8");
+  background-color: white;
+  border-bottom: 1px solid $border-light;
+  position: sticky;
+  top: 0;
+  z-index: z-index("20");
+  box-shadow: shadow("xs");
+
+  &__search-bar {
+    display: none;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-  
-    &__search-bar {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem; // text-xs
-      border-radius: 9999px; // rounded-full
-      border: 1.5px solid #d1d5db; // ring-gray-300
-      padding: 0 0.5rem;
-  
-      @media (min-width: 768px) { // md breakpoint
-        display: flex;
-      }
-    }
-  
-    &__search-input {
-      width: 200px;
-      padding: 0.5rem;
-      background-color: transparent;
-      outline: none;
-      border: 0;
-    }
-  
-    &__user-section {
+    gap: space("2");
+    background-color: $bg-secondary;
+    border: 1px solid $border-medium;
+    border-radius: border-radius("full");
+    padding: space("2") space("4");
+    transition: all $transition-base;
+
+    @include respond-to("md") {
       display: flex;
-      align-items: center;
-      gap: 1.5rem; // gap-6
-      justify-content: flex-end;
-      width: 100%;
     }
-  
-    &__icon {
-      background-color: #ffffff;
-      border-radius: 50%;
-      width: 1.75rem; // w-7
-      height: 1.75rem; // h-7
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-    }
-  
-    &__icon-notification {
-      position: relative;
-    }
-  
-    &__notification-count {
-      position: absolute;
-      top: -0.75rem; // -top-3
-      right: -0.75rem; // -right-3
-      width: 1.25rem; // w-5
-      height: 1.25rem; // h-5
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #7c3aed; // purple-500
-      color: #ffffff;
-      border-radius: 50%;
-      font-size: 0.75rem; // text-xs
-    }
-  
-    &__user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-  
-    &__user-name {
-      font-size: 0.75rem; // text-xs
-      line-height: 1rem; // leading-3
-      font-weight: 500; // font-medium
-    }
-  
-    &__user-role {
-      font-size: 0.625rem; // text-[10px]
-      color: #6b7280; // text-gray-500
-      text-align: right;
-    }
-  
-    &__avatar {
-      border-radius: 50%; // rounded-full
+
+    &:focus-within {
+      border-color: $brand-primary;
+      background-color: white;
     }
   }
+
+  &__search-input {
+    width: 200px;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: font-size("sm");
+    color: $text-primary;
+
+    &::placeholder {
+      color: $text-tertiary;
+    }
+  }
+
+  &__user-section {
+    @include flex-center;
+    gap: space("4");
+    margin-left: auto;
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $bg-secondary;
+    border: 1px solid $border-light;
+    border-radius: border-radius("lg");
+    cursor: pointer;
+    transition: all $transition-base;
+    color: $text-secondary;
+
+    @include focus-ring;
+
+    &:hover {
+      background-color: $bg-tertiary;
+      color: $text-primary;
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__icon-notification {
+    position: relative;
+  }
+
+  &__notification-count {
+    @include flex-center;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: $danger;
+    color: white;
+    border-radius: border-radius("full");
+    font-size: font-size("xs");
+    font-weight: font-weight("bold");
+    border: 2px solid white;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: space("1");
+  }
+
+  &__user-name {
+    font-size: font-size("sm");
+    font-weight: font-weight("semibold");
+    color: $text-primary;
+  }
+
+  &__user-role {
+    font-size: font-size("xs");
+    color: $text-tertiary;
+  }
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: border-radius("full");
+    border: 2px solid $border-light;
+    object-fit: cover;
+  }
+}
   

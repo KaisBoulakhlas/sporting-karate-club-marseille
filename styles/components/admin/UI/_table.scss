@@ -1,11 +1,47 @@
+@import "../../../admin/tokens";
+
 .table {
-    width: 100%; // w-full
-    margin-top: 1rem; // mt-4
-    border-collapse: collapse;
-    &__header {
-      color: #6b7280; // text-gray-500
-      text-align: left;
-      font-size: 0.875rem; // text-sm
+  width: 100%;
+  border-collapse: collapse;
+
+  &__header {
+    color: $text-secondary;
+    text-align: left;
+    font-size: font-size("sm");
+    font-weight: font-weight("semibold");
+    background-color: $bg-secondary;
+    padding: space("4");
+    border-bottom: 1px solid $border-light;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid $border-light;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background-color: $bg-secondary;
+    }
+
+    &:last-child {
+      border-bottom: none;
     }
   }
+
+  td {
+    padding: space("4");
+    font-size: font-size("sm");
+    color: $text-primary;
+    vertical-align: middle;
+  }
+
+  th {
+    padding: space("4");
+    font-weight: font-weight("semibold");
+    color: $text-secondary;
+    background-color: $bg-secondary;
+    text-align: left;
+    border-bottom: 1px solid $border-light;
+    letter-spacing: 0.02em;
+  }
+}
   

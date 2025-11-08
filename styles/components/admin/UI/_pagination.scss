@@ -1,73 +1,71 @@
+@import "../../../admin/tokens";
+@import "../../../admin/components";
+
 .pagination {
-    padding:0.85rem;
-    gap:1rem;
+  padding: space("4") space("0");
+  gap: space("4");
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $text-secondary;
+  flex-wrap: wrap;
+
+  &__button {
+    @extend .btn;
+    @extend .btn--secondary;
+    @extend .btn--sm;
+    min-width: 80px;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__pages {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    color: #6b7280;
+    gap: space("2");
+    font-size: font-size("sm");
 
-    @include phone-sm {
-      padding: 1rem;
-    }
-    
-    &__button {
-      padding: 0.5rem 1rem; 
-      border-radius: 0.375rem;
-      background-color: #e2e8f0;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: opacity 0.2s, cursor 0.2s;
-      border:0;
-      outline:0;
-      color: $secondary-color;
-      background: transparent;
-      transition: .3s all ease;
-      border: 2px solid #bae6fd;
-      cursor:pointer;
-
-      &:not(:disabled):hover {
-        background: #bae6fd;
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-    }
-  
-    &__pages {
-      display: flex;
+    &__page {
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-  
-      &__page {
-        border: none;
-        text-align: center;
-        display: inline-block;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        border-radius: 50%;
-        color: $secondary-color;
-        background: transparent;
-        border: 2px solid #bae6fd;
-        cursor:pointer;
-        transition: .3s all ease;
-        box-shadow: 0px 10px 27px -20px rgba(0, 0, 0, 0.33);
-        
-        @include phone-sm {
-          width: 40px;
-          height: 40px;
-          line-height: 40px;
-        }
+      justify-content: center;
+      min-width: 40px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: border-radius("md");
+      background-color: transparent;
+      border: 1px solid $border-medium;
+      color: $text-secondary;
+      font-weight: font-weight("medium");
+      cursor: pointer;
+      transition: all $transition-base;
+      font-size: font-size("sm");
 
-        &:hover, &--active {
-          background: #bae6fd;
-          color: $secondary-color;
-          border: 1px solid transparent;
+      @include focus-ring;
+
+      &:hover {
+        border-color: $brand-primary;
+        color: $brand-primary;
+        background-color: $brand-light;
+      }
+
+      &--active {
+        background-color: $brand-primary;
+        border-color: $brand-primary;
+        color: white;
+        cursor: default;
+
+        &:hover {
+          border-color: $brand-primary;
+          color: white;
+          background-color: $brand-primary;
         }
       }
     }
   }
+}
   
