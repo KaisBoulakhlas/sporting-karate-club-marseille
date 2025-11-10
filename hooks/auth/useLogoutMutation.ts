@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/auth-client";
+import { notifyAuthChange } from "./useAuth";
 
 export function useLogoutMutation() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +22,12 @@ export function useLogoutMutation() {
         return;
       }
 
-      router.push("/login");
-      router.refresh();
+      // Notify all useAuth hooks to refetch session
+      notifyAuthChange();
+
+      // Use replace instead of push to avoid back button issues
+      // router.refresh() is called automatically after replace
+      router.replace("/login");
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Une erreur est survenue";
