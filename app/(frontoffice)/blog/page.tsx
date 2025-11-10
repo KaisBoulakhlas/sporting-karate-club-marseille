@@ -16,14 +16,17 @@ export const metadata: Metadata = {
 const BlogPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const ITEM_PER_PAGE = 4;
+
+  // Await searchParams as it's a Promise in Next.js 15+
+  const params = await searchParams;
 
   const { data, count, currentPage } =
     await getPaginatedItems<Prisma.PostWhereInput>({
       model: db.post,
-      searchParams,
+      searchParams: params,
       itemsPerPage: ITEM_PER_PAGE,
       searchField: "title",
       orderByField: "publishedAt",
