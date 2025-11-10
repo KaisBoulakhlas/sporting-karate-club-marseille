@@ -6,19 +6,25 @@
   gap: space("4");
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: $text-secondary;
+  justify-content: center;
   flex-wrap: wrap;
 
   &__button {
     @extend .btn;
     @extend .btn--secondary;
     @extend .btn--sm;
-    min-width: 80px;
+    min-width: 100px;
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
+      background-color: $bg-tertiary;
+      color: $text-tertiary;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $bg-tertiary;
+      border-color: $border-medium;
     }
   }
 
@@ -36,9 +42,9 @@
       width: 40px;
       height: 40px;
       padding: 0;
-      border-radius: border-radius("md");
-      background-color: transparent;
-      border: 1px solid $border-medium;
+      border-radius: border-radius("base");
+      background-color: white;
+      border: 1px solid $border-light;
       color: $text-secondary;
       font-weight: font-weight("medium");
       cursor: pointer;
@@ -47,10 +53,9 @@
 
       @include focus-ring;
 
-      &:hover {
-        border-color: $brand-primary;
-        color: $brand-primary;
-        background-color: $brand-light;
+      &:hover:not(.pagination__pages__page--active) {
+        border-color: $text-secondary;
+        color: $text-secondary;
       }
 
       &--active {
@@ -58,6 +63,7 @@
         border-color: $brand-primary;
         color: white;
         cursor: default;
+        font-weight: font-weight("semibold");
 
         &:hover {
           border-color: $brand-primary;

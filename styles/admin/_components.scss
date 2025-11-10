@@ -124,16 +124,18 @@
 }
 
 .btn--icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   padding: 0;
-  border-radius: border-radius("lg");
-  background-color: $bg-secondary;
-  color: $text-primary;
-  border-color: $border-light;
+  border-radius: border-radius("md");
+  background-color: transparent;
+  color: $text-secondary;
+  border: none;
+  transition: all $transition-base;
 
   &:hover:not(:disabled) {
-    background-color: $bg-tertiary;
+    background-color: $bg-secondary;
+    color: $text-primary;
   }
 
   &.btn--icon--primary {
@@ -142,6 +144,7 @@
 
     &:hover:not(:disabled) {
       background-color: $brand-light;
+      color: $brand-primary;
     }
   }
 
@@ -151,6 +154,7 @@
 
     &:hover:not(:disabled) {
       background-color: $success-light;
+      color: $success;
     }
   }
 
@@ -160,6 +164,7 @@
 
     &:hover:not(:disabled) {
       background-color: $danger-light;
+      color: $danger;
     }
   }
 
@@ -169,6 +174,7 @@
 
     &:hover:not(:disabled) {
       background-color: $warning-light;
+      color: $warning;
     }
   }
 }

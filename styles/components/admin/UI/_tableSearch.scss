@@ -1,42 +1,57 @@
+@import "../../../admin/tokens";
+
 .table-search {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.5rem; // gap-2
-    font-size: 0.75rem; // text-xs
-    border-radius: 9999px; // rounded-full
-    border: 1.5px solid #d1d5db; // ring-gray-300
-    padding: 0 0.5rem; // px-2
-  
-    @media (min-width: 768px) { // md breakpoint
+    gap: space("2");
+    border-radius: border-radius("md");
+    border: 1px solid $border-medium;
+    padding: space("2") space("3");
+    background-color: white;
+    transition: all $transition-base;
+
+    @include respond-to("md") {
       width: auto;
     }
-  
+
+    &:focus-within {
+      border-color: $brand-primary;
+      box-shadow: 0 0 0 3px rgba($brand-primary, 0.1);
+    }
+
     &__input {
-      width: 200px;
-      padding: 0.5rem; // p-2
+      flex: 1;
+      padding: 0;
       background-color: transparent;
       outline: none;
       border: none;
+      font-size: font-size("sm");
+      color: $text-primary;
+
+      &::placeholder {
+        color: $text-tertiary;
+      }
     }
 
     &__button {
-      background: none; 
+      background: none;
       border: none;
       padding: 0;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-    
+      flex-shrink: 0;
+
       &:hover {
-        filter: brightness(1.2);
+        opacity: 0.7;
       }
-    
+
       &:active {
         transform: scale(0.95);
       }
     }
-    
+
   }
   
