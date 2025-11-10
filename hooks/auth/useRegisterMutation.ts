@@ -38,8 +38,8 @@ export function useRegisterMutation() {
 
       if (response.data?.user) {
         // Auto redirect après inscription réussie
-        router.push("/");
-        router.refresh();
+        // Use replace instead of push to avoid blank page
+        router.replace("/");
 
         return {
           user: response.data.user as User,
