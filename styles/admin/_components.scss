@@ -124,18 +124,39 @@
 }
 
 .btn--icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   border-radius: border-radius("md");
   background-color: transparent;
   color: $text-secondary;
-  border: none;
+  border: 1px solid transparent;
   transition: all $transition-base;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
   &:hover:not(:disabled) {
     background-color: $bg-secondary;
     color: $text-primary;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   &.btn--icon--primary {
@@ -143,8 +164,9 @@
     color: $brand-primary;
 
     &:hover:not(:disabled) {
-      background-color: $brand-light;
+      background-color: color("primary-50");
       color: $brand-primary;
+      border-color: color("primary-100");
     }
   }
 
@@ -153,8 +175,9 @@
     color: $success;
 
     &:hover:not(:disabled) {
-      background-color: $success-light;
+      background-color: color("success-50");
       color: $success;
+      border-color: color("success-100");
     }
   }
 
@@ -163,8 +186,9 @@
     color: $danger;
 
     &:hover:not(:disabled) {
-      background-color: $danger-light;
+      background-color: color("danger-50");
       color: $danger;
+      border-color: color("danger-100");
     }
   }
 
@@ -173,8 +197,9 @@
     color: $warning;
 
     &:hover:not(:disabled) {
-      background-color: $warning-light;
+      background-color: color("warning-50");
       color: $warning;
+      border-color: color("warning-100");
     }
   }
 }

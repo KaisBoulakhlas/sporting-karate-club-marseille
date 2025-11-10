@@ -8,18 +8,22 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  width: fit-content;
+  margin: 0 auto;
 
   &__button {
     @extend .btn;
     @extend .btn--secondary;
     @extend .btn--sm;
-    min-width: 100px;
+    min-width: auto;
+    padding: space("2") space("4");
 
     &:disabled {
       opacity: 0.4;
       cursor: not-allowed;
       background-color: $bg-tertiary;
       color: $text-tertiary;
+      border-color: transparent;
     }
 
     &:not(:disabled):hover {
