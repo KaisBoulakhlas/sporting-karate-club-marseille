@@ -40,7 +40,7 @@
     &__button {
       @extend .btn;
       @extend .btn--icon;
-      @extend .btn--icon--success;
+      @extend .btn--icon--warning;
     }
 
     &__controls {

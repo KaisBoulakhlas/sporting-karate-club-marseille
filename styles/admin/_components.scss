@@ -1,0 +1,409 @@
+// ============================================
+// COMPONENTS - Reusable Component Styles
+// ============================================
+
+// BUTTONS
+// ============================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: space("2");
+  min-height: 44px;
+  padding: space("3") space("4");
+  font-size: font-size("sm");
+  font-weight: font-weight("medium");
+  border: 1px solid transparent;
+  border-radius: border-radius("md");
+  cursor: pointer;
+  transition: all $transition-base;
+  font-family: $font-family-base;
+  text-decoration: none;
+  user-select: none;
+
+  @include focus-ring;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+// Button Variants
+.btn--primary {
+  background-color: $brand-primary;
+  color: white;
+  border-color: $brand-primary;
+
+  &:hover:not(:disabled) {
+    background-color: $brand-primary-hover;
+    border-color: $brand-primary-hover;
+    transform: translateY(-2px);
+    box-shadow: shadow("md");
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.btn--secondary {
+  background-color: $bg-secondary;
+  color: $text-primary;
+  border-color: $border-medium;
+
+  &:hover:not(:disabled) {
+    background-color: $bg-tertiary;
+    border-color: $border-medium;
+  }
+}
+
+.btn--success {
+  background-color: $success;
+  color: white;
+  border-color: $success;
+
+  &:hover:not(:disabled) {
+    background-color: $success-hover;
+    border-color: $success-hover;
+    box-shadow: shadow("md");
+  }
+}
+
+.btn--danger {
+  background-color: $danger;
+  color: white;
+  border-color: $danger;
+
+  &:hover:not(:disabled) {
+    background-color: $danger-hover;
+    border-color: $danger-hover;
+    box-shadow: shadow("md");
+  }
+}
+
+.btn--warning {
+  background-color: $warning;
+  color: white;
+  border-color: $warning;
+
+  &:hover:not(:disabled) {
+    background-color: $warning-hover;
+    border-color: $warning-hover;
+    box-shadow: shadow("md");
+  }
+}
+
+.btn--orange {
+  background-color: $warning;
+  color: white;
+  border-color: $warning;
+
+  &:hover:not(:disabled) {
+    background-color: $warning-hover;
+    border-color: $warning-hover;
+    box-shadow: shadow("md");
+  }
+}
+
+.btn--sm {
+  padding: space("2") space("3");
+  min-height: 40px;
+  font-size: font-size("xs");
+}
+
+.btn--lg {
+  padding: space("4") space("6");
+  min-height: 48px;
+  font-size: font-size("base");
+}
+
+.btn--icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: border-radius("lg");
+  background-color: $bg-secondary;
+  color: $text-primary;
+  border-color: $border-light;
+
+  &:hover:not(:disabled) {
+    background-color: $bg-tertiary;
+  }
+
+  &.btn--icon--primary {
+    background-color: transparent;
+    color: $brand-primary;
+
+    &:hover:not(:disabled) {
+      background-color: $brand-light;
+    }
+  }
+
+  &.btn--icon--success {
+    background-color: transparent;
+    color: $success;
+
+    &:hover:not(:disabled) {
+      background-color: $success-light;
+    }
+  }
+
+  &.btn--icon--danger {
+    background-color: transparent;
+    color: $danger;
+
+    &:hover:not(:disabled) {
+      background-color: $danger-light;
+    }
+  }
+
+  &.btn--icon--warning {
+    background-color: transparent;
+    color: $warning;
+
+    &:hover:not(:disabled) {
+      background-color: $warning-light;
+    }
+  }
+}
+
+// FORMS
+// ============================================
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: space("2");
+  margin-bottom: space("4");
+}
+
+label {
+  font-size: font-size("sm");
+  font-weight: font-weight("medium");
+  color: $text-primary;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  padding: space("3") space("4");
+  font-size: font-size("sm");
+  border: 1px solid $border-medium;
+  border-radius: border-radius("md");
+  background-color: white;
+  color: $text-primary;
+  font-family: $font-family-base;
+  transition: all $transition-base;
+
+  @include focus-ring;
+
+  &::placeholder {
+    color: $text-tertiary;
+  }
+
+  &:hover {
+    border-color: $border-medium;
+  }
+
+  &:focus {
+    border-color: $brand-primary;
+    background-color: white;
+  }
+
+  &:disabled {
+    background-color: $bg-secondary;
+    color: $text-tertiary;
+    cursor: not-allowed;
+  }
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right space("3") center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.form-error {
+  font-size: font-size("xs");
+  color: $danger;
+  margin-top: space("1");
+}
+
+// INPUTS WRAPPER
+// ============================================
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: space("2");
+}
+
+// CARDS
+// ============================================
+.card {
+  background-color: white;
+  border: 1px solid $border-light;
+  border-radius: border-radius("lg");
+  box-shadow: shadow("xs");
+  overflow: hidden;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: shadow("sm");
+  }
+}
+
+.card-header {
+  padding: space("6") space("6");
+  border-bottom: 1px solid $border-light;
+  background-color: $bg-secondary;
+}
+
+.card-body {
+  padding: space("6");
+}
+
+.card-footer {
+  padding: space("6");
+  border-top: 1px solid $border-light;
+  background-color: $bg-secondary;
+}
+
+// BADGES
+// ============================================
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: space("1") space("3");
+  font-size: font-size("xs");
+  font-weight: font-weight("semibold");
+  border-radius: border-radius("full");
+  width: fit-content;
+
+  &--primary {
+    background-color: $brand-light;
+    color: $brand-primary;
+  }
+
+  &--success {
+    background-color: color("success-100");
+    color: color("success-600");
+  }
+
+  &--danger {
+    background-color: $danger-light;
+    color: $danger;
+  }
+
+  &--warning {
+    background-color: color("warning-100");
+    color: color("warning-600");
+  }
+
+  &--info {
+    background-color: $info-light;
+    color: $info;
+  }
+
+  &--golden {
+    background-color: #fef08a;
+    color: #ca8a04;
+  }
+
+  &--silver {
+    background-color: #f3f4f6;
+    color: #6b7280;
+  }
+
+  &--basic {
+    background-color: #ede9fe;
+    color: #7c3aed;
+  }
+}
+
+// ALERTS
+// ============================================
+.alert {
+  padding: space("4");
+  border-radius: border-radius("md");
+  border-left: 4px solid;
+
+  &--success {
+    background-color: $success-light;
+    border-color: $success;
+    color: $success;
+  }
+
+  &--danger {
+    background-color: $danger-light;
+    border-color: $danger;
+    color: $danger;
+  }
+
+  &--warning {
+    background-color: $warning-light;
+    border-color: $warning;
+    color: $warning;
+  }
+
+  &--info {
+    background-color: $info-light;
+    border-color: $info;
+    color: $info;
+  }
+}
+
+// UPLOAD AREA
+// ============================================
+.upload {
+  @include flex-center;
+  flex-direction: column;
+  gap: space("3");
+  padding: space("6");
+  border: 2px dashed $border-medium;
+  border-radius: border-radius("lg");
+  cursor: pointer;
+  background-color: $bg-secondary;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $brand-primary;
+    background-color: $brand-light;
+  }
+
+  span {
+    font-size: font-size("sm");
+    color: $text-secondary;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__preview {
+    margin-top: space("4");
+  }
+
+  &__image-preview {
+    border-radius: border-radius("md");
+    object-fit: cover;
+  }
+}

@@ -53,9 +53,9 @@
     }
 
     &--active {
-      background-color: $brand-light;
-      color: $brand-primary;
-      border-left: 4px solid $brand-primary;
+      background-color: transparent;
+      color: $warning;
+      border-left: 4px solid $warning;
       padding-left: calc(#{space("4")} - 4px);
 
       &::before {
@@ -65,7 +65,7 @@
         top: 0;
         bottom: 0;
         width: 4px;
-        background-color: $brand-primary;
+        background-color: $warning;
         border-radius: border-radius("full");
       }
     }
