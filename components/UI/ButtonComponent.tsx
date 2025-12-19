@@ -19,7 +19,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
     <button
       type={type}
       style={style}
-      className={`btn ${className}`}
+      className={className}
       disabled={disabled}>
       {text}
     </button>

@@ -1,5 +1,5 @@
 "use server";
-import bcrypt from 'bcryptjs';
+import { hashPassword } from 'better-auth/crypto';
 import { userSchema, userUpdateSchema } from "@/app/schemas/userFormSchema";
 import { db } from "@/lib/db";
 import { getPostById, getUserByEmail, getUserById } from "@/lib/utils";
@@ -10,17 +10,18 @@ import { slugify } from '@/lib/slugify';
 import { UserRole } from '@prisma/client';
 import { GalleryFormSchema, galleryItemSchema } from '@/app/schemas/galleryItemSchema';
 import { cloudinaryInstance } from '@/lib/cloudinary';
+import { revalidatePath } from 'next/cache';
 
 export const register = async (data: z.infer<typeof userSchema>) => {
-  try{ 
+  try{
     const session = await getServerSession();
 
-    if (!session?.user.role) {
+    if (!session?.user) {
       throw new Error("Accès non autorisé.");
     }
-  
 
-    if (![UserRole.ADMIN].includes(session?.user.role as any)) {
+    const userRole = (session.user as any)?.role;
+    if (!userRole || userRole !== UserRole.ADMIN) {
       throw new Error("Permissions insuffisantes.");
     }
 
@@ -31,24 +32,22 @@ export const register = async (data: z.infer<typeof userSchema>) => {
     }
   
     const { email, password, name, firstName, image, role } = validatedFields.data;
-    
-    if (!password) {
-      return { error: "Password is required for registration!" };
-    }
-  
-    const hashedPassword = await bcrypt.hash(password, 10);
-  
-    const existingUser = await getUserByEmail(email);
-  
-    if (existingUser) {
-      return { error: "Email already in use!" };
-    }
-    
+
     if (!password) {
       return { error: "Password is required for registration!" };
     }
 
-    await db.user.create({
+    const existingUser = await getUserByEmail(email);
+
+    if (existingUser) {
+      return { error: "Email already in use!" };
+    }
+
+    // Hash password using Better Auth's function
+    const hashedPassword = await hashPassword(password);
+
+    // Create user
+    const user = await db.user.create({
       data: {
         name,
         email,
@@ -57,7 +56,17 @@ export const register = async (data: z.infer<typeof userSchema>) => {
         role,
       },
     });
-    
+
+    // Create Account record with hashed password
+    await db.account.create({
+      data: {
+        userId: user.id,
+        accountId: user.id,
+        providerId: "credential",
+        password: hashedPassword,
+      },
+    });
+
     return { success: true, error: false };
 
   } catch (err) {
@@ -189,6 +198,9 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
       },
     });
 
+    // Revalider le cache du blog
+    revalidatePath("/blog");
+
     return { success: true };
   } catch (error) {
     console.error("Erreur lors de la création de l'article :", error);
@@ -220,6 +232,9 @@ export const updatePost = async (data: z.infer<typeof postSchema>) => {
         imageUrl: imageUrl,
       },
     });
+
+    // Revalider le cache du blog
+    revalidatePath("/blog");
 
     return { success: true };
   } catch (error) {
@@ -253,10 +268,13 @@ export const deletePost = async (post: { id: string; imageUrl: string }) => {
     if ("error" in cloudinaryResponse) {
       console.warn("Cloudinary:", cloudinaryResponse.error);
     }
-    
+
     await db.post.delete({
       where: { id },
     });
+
+    // Revalider le cache du blog
+    revalidatePath("/blog");
 
     return { success: true };
   } catch (error) {
@@ -292,6 +310,9 @@ export async function createGalleryItem(data: GalleryFormSchema) {
         title
       },
     });
+
+    // Revalider le cache de la galerie
+    revalidatePath("/galerie");
 
     return { success: true };
   } catch (error) {
@@ -336,13 +357,13 @@ export async function deleteFromCloudinary(
 
 export const deleteGalleryItem = async (galleryItem: { id: string; src: string }) => {
   try {
-    
+
     const session = await getServerSession();
 
     if (!session?.user.role) {
       throw new Error("Accès non autorisé.");
     }
-  
+
     if (![UserRole.ADMIN].includes(session?.user.role as any)) {
       throw new Error("Permissions insuffisantes.");
     }
@@ -362,6 +383,9 @@ export const deleteGalleryItem = async (galleryItem: { id: string; src: string }
     await db.galleryItem.delete({
       where: { id },
     });
+
+    // Revalider le cache de la galerie
+    revalidatePath("/galerie");
 
     return { success: true };
   } catch (error) {

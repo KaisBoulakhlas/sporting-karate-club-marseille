@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const ImageComponent: React.FC<ImageComponentProps> = ({
   src,
-  alt,
+  alt = "Image",
   loading,
   hasLink,
   className,

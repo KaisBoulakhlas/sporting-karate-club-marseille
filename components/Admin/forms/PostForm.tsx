@@ -6,15 +6,12 @@ import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { toast } from "react-toastify";
-import dynamic from "next/dynamic";
 import Input from "@/components/UI/Input";
 import { postSchema, PostFormSchema } from "@/app/schemas/postFormSchema";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import "react-quill/dist/quill.snow.css";
 import { createPost, updatePost } from "@/actions/admin/actionsForm";
-
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import QuillEditor from "@/components/UI/QuillEditor";
 
 const modules = {
   toolbar: [
@@ -133,11 +130,6 @@ const PostForm = ({
           <div className="input-wrapper">
             <CldUploadWidget
               uploadPreset="sportingkarate"
-              options={{
-                folder: "articles",
-                resourceType: "image",
-                clientAllowedFormats: ["png", "jpeg", "jpg"],
-              }}
               onSuccess={(result: any, { widget }) => {
                 setFileSrc(result.info?.secure_url);
                 setValue("imageUrl", result.info?.secure_url);
@@ -186,13 +178,12 @@ const PostForm = ({
           </div>
         </div>
         <div className="user-form__containerField">
-          <ReactQuill
+          <QuillEditor
             value={getValues("content")}
             onChange={(value) => {
               const cleanedValue = value === "<p><br></p>" ? "" : value;
               setValue("content", cleanedValue, { shouldValidate: true });
             }}
-            theme="snow"
             modules={modules}
           />
           {errors.content && (

@@ -1,20 +1,17 @@
 "use client";
 import Form from "@/components/Contact/Form";
-import Spinner from "@/components/UI/Spinner";
+import { Loader } from "@/components/UI/Loading/Loader";
 import { locations } from "@/constants/data";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import React, { useMemo } from "react";
+import React from "react";
+
+const Map = dynamic(() => import("@/components/Map/MapComponent"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
 
 const Contact = () => {
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("@/components/Map/MapComponent"), {
-        loading: () => <Spinner />,
-        ssr: false,
-      }),
-    []
-  );
   return (
     <>
       <Head>
@@ -23,9 +20,9 @@ const Contact = () => {
       </Head>
       <div className="contact">
         <Form />
-        <div className="contact__map">
-          <Map locations={locations} />
-        </div>
+      </div>
+      <div className="contact__map">
+        <Map locations={locations} />
       </div>
     </>
   );

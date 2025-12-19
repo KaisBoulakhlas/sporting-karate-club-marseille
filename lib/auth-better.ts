@@ -55,27 +55,24 @@ export const authClient = auth;
 export async function getServerSession() {
   const { cookies } = await import("next/headers");
   const cookieStore = await cookies();
-  const sessionToken = cookieStore.get("better-auth.session_token")?.value;
-
-  if (!sessionToken) {
-    return null;
-  }
 
   try {
-    const session = await db.session.findUnique({
-      where: { sessionToken },
-      include: { user: true },
+    // Get all cookies as headers format for Better Auth
+    const cookiesHeader = cookieStore
+      .getAll()
+      .map(({ name, value }) => `${name}=${value}`)
+      .join("; ");
+
+    // Use Better Auth's session getter with headers
+    const session = await auth.api.getSession({
+      headers: {
+        cookie: cookiesHeader,
+      },
     });
 
-    if (!session || session.expires < new Date()) {
-      return null;
-    }
-
-    return {
-      user: session.user,
-      expires: session.expires,
-    };
-  } catch {
+    return session;
+  } catch (error) {
+    console.error("Error fetching session:", error);
     return null;
   }
 }

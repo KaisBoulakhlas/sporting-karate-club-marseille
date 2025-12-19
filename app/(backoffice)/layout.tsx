@@ -1,5 +1,6 @@
 import Menu from "@/components/Admin/Layout/Menu";
 import Navbar from "@/components/Admin/Layout/Navbar";
+import { BackOfficeProtection } from "@/components/Admin/BackOfficeProtection";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,18 +17,20 @@ export const metadata: Metadata = {
 
 export default function BackOfficeLayout({ children }: ProtectedLayoutProps) {
   return (
-    <div className="dashboard-layout">
-      <div className="dashboard-layout__sidebar">
-        <Link href="/back-office" className="dashboard-layout__logo">
-          <Image src="/images/logo.png" alt="logo" width={32} height={32} />
-          <span className="dashboard-layout__logo-text">BACK-OFFICE</span>
-        </Link>
-        <Menu />
+    <BackOfficeProtection>
+      <div className="dashboard-layout">
+        <div className="dashboard-layout__sidebar">
+          <Link href="/back-office" className="dashboard-layout__logo">
+            <Image src="/images/logo.png" alt="logo" width={32} height={32} />
+            <span className="dashboard-layout__logo-text">BACK-OFFICE</span>
+          </Link>
+          <Menu />
+        </div>
+        <div className="dashboard-layout__main">
+          <Navbar />
+          {children}
+        </div>
       </div>
-      <div className="dashboard-layout__main">
-        <Navbar />
-        {children}
-      </div>
-    </div>
+    </BackOfficeProtection>
   );
 }

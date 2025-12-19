@@ -16,7 +16,7 @@ export default async function RootLayout({
 }>) {
   const { quicksand } = getFonts();
   return (
-    <html lang="fr">
+    <html lang="fr" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/images/favicon.ico" />
         <link

@@ -1,8 +1,6 @@
 import { Post } from "@/types/types";
 import React from "react";
-import ImageComponent from "../UI/ImageComponent";
 import Image from "next/image";
-import { slugify } from "@/lib/slugify";
 import Link from "next/link";
 import { formatFrenchDateTime } from "@/lib/utils";
 
@@ -11,10 +9,6 @@ interface PostProps {
 }
 
 const PostComponent: React.FC<PostProps> = ({ post }) => {
-  // const formattedDate = post.publishedAt
-  //   ? new Date(post.publishedAt).toLocaleDateString()
-  //   : "Date inconnue";
-
   return (
     <div className="post" title={post.title}>
       <Link href={`/posts/${post.slug}`}>

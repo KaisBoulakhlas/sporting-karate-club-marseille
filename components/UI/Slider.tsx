@@ -1,8 +1,8 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React from "react";
 import Testimonial from "../Testimonials/Testimonial";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import useSlider from "@/hooks/useSlider";
+import { useCarousel } from "@/hooks/useCarousel";
 import { testimonials } from "@/constants/data";
 
 const Slider: React.FC = () => {
@@ -13,61 +13,13 @@ const Slider: React.FC = () => {
     setIndex,
     isPrevDisabled,
     isNextDisabled,
-  } = useSlider(testimonials);
-
-  const touchStartX = useRef<number | null>(null);
-  const [touchMoveX, setTouchMoveX] = useState<number | null>(null);
-  const [isSwiping, setIsSwiping] = useState(false);
-
-  const intermediateThreshold = 10; // Pourcentage de largeur visible pour déclencher un changement immédiat
-  const swipeThreshold = 75; // Seuil pour compléter le swipe
-
-  const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
-    if ("touches" in e) {
-      touchStartX.current = e.touches[0].clientX;
-    } else {
-      touchStartX.current = e.clientX;
-    }
-    setIsSwiping(true);
-    setTouchMoveX(null);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
-    if (touchStartX.current !== null) {
-      const currentX = "touches" in e ? e.touches[0].clientX : e.clientX;
-      setTouchMoveX(currentX);
-
-      // Détection d'un seuil intermédiaire
-      const distance = touchStartX.current - currentX;
-      const swipePercentage = (distance / window.innerWidth) * 100;
-
-      if (swipePercentage > intermediateThreshold && !isNextDisabled) {
-        handleNextClick();
-        handleTouchEnd(); // Terminer le swipe
-      } else if (swipePercentage < -intermediateThreshold && !isPrevDisabled) {
-        handlePrevClick();
-        handleTouchEnd(); // Terminer le swipe
-      }
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartX.current === null || touchMoveX === null) return;
-
-    const distance = touchStartX.current - touchMoveX;
-
-    setIsSwiping(false);
-
-    // Vérification du seuil pour compléter le swipe
-    if (distance > swipeThreshold) {
-      handleNextClick();
-    } else if (distance < -swipeThreshold) {
-      handlePrevClick();
-    }
-
-    touchStartX.current = null;
-    setTouchMoveX(null);
-  };
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    isSwiping,
+    touchStartX,
+    touchMoveX,
+  } = useCarousel({ items: testimonials, swipeThreshold: 75 });
 
   const calculateTransform = () => {
     if (currentIndex === null) return "translate3d(0%, 0, 0)";

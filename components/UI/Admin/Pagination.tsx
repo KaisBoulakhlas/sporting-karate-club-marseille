@@ -2,11 +2,10 @@
 
 import { useRouter } from "next/navigation";
 
-const Pagination = ({ page, count }: { page: number; count: number }) => {
+const Pagination = ({ page, count, itemsPerPage = 4 }: { page: number; count: number; itemsPerPage?: number }) => {
   const router = useRouter();
-  const ITEM_PER_PAGE = 4;
-  const hasPrev = ITEM_PER_PAGE * (page - 1) > 0;
-  const hasNext = ITEM_PER_PAGE * (page - 1) + ITEM_PER_PAGE < count;
+  const hasPrev = itemsPerPage * (page - 1) > 0;
+  const hasNext = itemsPerPage * (page - 1) + itemsPerPage < count;
 
   const changePage = (newPage: number) => {
     const params = new URLSearchParams(window.location.search);
@@ -25,7 +24,7 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
       </button>
       <div className="pagination__pages">
         {Array.from(
-          { length: Math.ceil(count / ITEM_PER_PAGE) },
+          { length: Math.ceil(count / itemsPerPage) },
           (_, index) => {
             const pageIndex = index + 1;
             return (

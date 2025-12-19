@@ -2,17 +2,46 @@
 import { ModalProps } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import GalleryItem from "../Gallery/GalleryItem";
+import { useSwipe } from "@/hooks/useSwipe";
 
 const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSliding, setIsSliding] = useState(false);
+
+  const { handleTouchStart, handleTouchMove, handleTouchEnd, isSwiping } = useSwipe({
+    onNext: () => {
+      setIsSliding(true);
+      setTimeout(() => {
+        onNext();
+        setIsSliding(false);
+      }, 300);
+    },
+    onPrev: () => {
+      setIsSliding(true);
+      setTimeout(() => {
+        onPrev();
+        setIsSliding(false);
+      }, 300);
+    },
+    threshold: 75,
+  });
 
   useEffect(() => {
     setIsOpen(true);
   }, []);
 
-  const [isSliding, setIsSliding] = useState(false);
+  const handleClose = () => {
+    setIsOpen(false);
+    setTimeout(onClose, 300);
+  };
 
-  const handleNext = () => {
+  const handleModalClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement) === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  const handleNextClick = () => {
     setIsSliding(true);
     setTimeout(() => {
       onNext();
@@ -20,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
     }, 300);
   };
 
-  const handlePrev = () => {
+  const handlePrevClick = () => {
     setIsSliding(true);
     setTimeout(() => {
       onPrev();
@@ -28,15 +57,10 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
     }, 300);
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
-    setTimeout(onClose, 300);
-  };
-
   return (
     <div
       className={`modal ${isOpen ? "modal--open" : ""}`}
-      onClick={handleClose}>
+      onClick={handleModalClick}>
       <span className="modal__close" onClick={handleClose}>
         &times;
       </span>
@@ -44,7 +68,7 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
         className="modal__nav modal__nav--prev"
         onClick={(e) => {
           e.stopPropagation();
-          handlePrev();
+          handlePrevClick();
         }}>
         &#10094;
       </button>
@@ -52,7 +76,15 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
         className={`modal__content ${
           isSliding ? "modal__content--sliding" : ""
         }`}
-        onClick={(e) => e.stopPropagation()}>
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleTouchStart}
+        onMouseMove={handleTouchMove}
+        onMouseUp={handleTouchEnd}
+        onMouseLeave={handleTouchEnd}
+        style={{ cursor: isSwiping ? "grabbing" : "grab" }}>
         <GalleryItem
           item={item}
           cnImage="modal__image"
@@ -64,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({ item, onClose, onNext, onPrev }) => {
         className="modal__nav modal__nav--next"
         onClick={(e) => {
           e.stopPropagation();
-          handleNext();
+          handleNextClick();
         }}>
         &#10095;
       </button>

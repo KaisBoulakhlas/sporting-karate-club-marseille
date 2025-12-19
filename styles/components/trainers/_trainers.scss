@@ -1,11 +1,21 @@
 .trainers {
     @extend %container;
-    gap:2rem;
-    margin:1rem 0;
+    gap: 3rem;
+    margin: 0;
     flex-direction: column;
-    overflow:hidden;
+    overflow: hidden;
+    padding: 3rem 1.5rem;
+
     @include tablet-lg {
-        gap:5rem;
+        gap: 5.5rem;
+        padding: 4rem 2rem;
+    }
+
+    @include desktop-xl {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 5rem 3rem;
+        gap: 6rem;
     }
 }
 
@@ -23,9 +33,9 @@
     }
 
     @include desktop-xl {
-        width:80%;
+        width: 100%;
     }
-    
+
     &--reverse {
         @include tablet-lg {
             flex-direction: row-reverse;
@@ -35,73 +45,96 @@
     &__containerImage {
         position: relative;
         width: 100%;
-        clip-path: inset(-20px 0 0 0);
+        clip-path: inset(-30px 0 0 0);
         height: 300px;
         background-image: linear-gradient(315deg, #bbffff, #FFFFFF);
 
         @include tablet-lg {
             flex: 1;
+            clip-path: inset(-30px 0 0 0);
+            height: 350px;
+            align-self: stretch;
         }
 
         @include desktop-xl {
             clip-path: inset(-35px 0 0 0);
+            height: 400px;
         }
-        
+
     }
   
     &__image {
         position: absolute;
         right: -5%;
-        bottom: -20%;
+        bottom: -30px;
         height: 100%;
-        object-fit: cover; 
-        transform: translateY(100%);
-        
+        object-fit: cover;
+
         img {
-            height:125% !important;
+            height: 100% !important;
         }
 
         @include tablet-lg {
             max-width: 265px;
         }
 
+        @include desktop-xl {
+            bottom: -35px;
+        }
+
         &--reverse {
             @include tablet-lg {
-                right:unset;
-                left:-5%;
+                right: unset;
+                left: -5%;
             }
         }
-        
+
     }
   
     &__infos {
-      padding: 1rem;
+      padding: 2rem 1.5rem;
       text-align: center;
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
 
       @include tablet-lg {
-        padding: 0rem 1rem 1rem 1rem;
-        display: flex;
+        padding: 1.5rem;
         text-align: left;
-        flex-wrap: wrap;
-        flex-direction: column;
-        flex: 1;
-        gap: 1rem;
+        gap: 1.2rem;
+      }
+
+      @include desktop-xl {
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
       }
     }
-  
+
     &__fullname {
       font-size: 1.5rem;
       font-weight: bold;
+      color: $secondary-color;
+      margin: 0;
+
+      @include desktop-xl {
+        font-size: 1.75rem;
+      }
     }
-  
+
     &__profession {
-      font-size: 1.2rem;
-      color: gray;
+      font-size: 1.1rem;
+      color: #6b7280;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
     }
-  
+
     &__description {
       font-size: 1rem;
-      margin-top: 0.5rem;
+      margin: 0;
+      line-height: 1.6;
+      color: #4b5563;
     }
   }
   

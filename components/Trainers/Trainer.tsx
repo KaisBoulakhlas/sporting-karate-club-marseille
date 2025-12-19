@@ -6,7 +6,7 @@ import ImageComponent from "../UI/ImageComponent";
 import useFadeAnimation from "@/hooks/useFadeAnimation";
 
 const bounceAnimation = {
-  y: [100, -50, 50, -135],
+  y: [350, -20, 10, 0],
   transition: {
     duration: 4,
     ease: "easeInOut",
@@ -46,6 +46,7 @@ const Trainer: React.FC<TrainerProps> = ({
           className={`trainer__image ${
             reversed ? "trainer__image--reverse" : ""
           }`}
+          initial={{ y: 350 }}
           animate={bounceControls}>
           <ImageComponent
             alt={fullname}

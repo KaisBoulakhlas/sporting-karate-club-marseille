@@ -1,88 +1,98 @@
+@import "../../../admin/tokens";
+@import "../../../admin/components";
+
 .user-form {
+  display: flex;
+  flex-direction: column;
+  gap: space("6");
+
+  &__title {
+    @include heading-2;
+    margin: 0;
+  }
+
+  &__subtitle {
+    @include text-sm;
+    color: $text-secondary;
+  }
+
+  &__fields {
     display: flex;
     flex-direction: column;
-  
-    &__title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-  
-    &__subtitle {
-      font-size: 0.875rem;
-      color: #6b7280;
-      margin-bottom: 1rem;
-    }
-  
-    &__fields {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    gap: space("6");
+  }
 
-    &__containerField {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1rem;
-    }
+  &__containerField {
+    display: flex;
+    flex-direction: column;
+    gap: space("4");
 
-    .upload {
-      font-size: 0.75rem;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    
-      &__icon {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        object-fit: cover;
+    @include respond-to("lg") {
+      flex-direction: row;
+      align-items: flex-start;
+
+      > * {
+        flex: 1;
       }
-    }
-
-    &__button {
-      background-color: #3b82f6;
-      color: #ffffff; 
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      margin-top: 1rem;
-      border:0;
-      outline:0;
-      cursor: pointer;
-      transition:0.3s;
-
-      &:not(:disabled):hover {
-        background: #bae6fd;
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-    }
-  
-    &__error {
-      color: #ef4444;
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
-    }
-
-    &__label {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-  
-    &__select {
-      border-radius: 0.375rem;
-      padding: 0.5rem;
-      font-size: 0.875rem;
-      outline:0;
-      width: 100%;
-      border: 1.5px solid #d1d5db;
     }
   }
+
+  &__button {
+    @extend .btn;
+    @extend .btn--primary;
+    margin-top: space("2");
+    align-self: flex-end;
+  }
+
+  &__error {
+    @extend .form-error;
+  }
+
+  &__label {
+    @include text-sm;
+    color: $text-secondary;
+    font-weight: font-weight("medium");
+    display: block;
+    margin-bottom: space("1");
+  }
+
+  &__select {
+    padding: space("3") space("4");
+    font-size: font-size("sm");
+    border: 1px solid $border-medium;
+    border-radius: border-radius("md");
+    background-color: white;
+    color: $text-primary;
+    font-family: $font-family-base;
+    transition: all $transition-base;
+    width: 100%;
+
+    @include focus-ring;
+
+    &:hover {
+      border-color: $border-medium;
+    }
+
+    &:focus {
+      border-color: $brand-primary;
+      background-color: white;
+    }
+
+    &:disabled {
+      background-color: $bg-secondary;
+      color: $text-tertiary;
+      cursor: not-allowed;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+  }
+}
   

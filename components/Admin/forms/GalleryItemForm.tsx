@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import Input from "@/components/UI/Input";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import "react-quill/dist/quill.snow.css";
 import { createGalleryItem } from "@/actions/admin/actionsForm";
 import {
   GalleryFormSchema,
@@ -102,10 +101,6 @@ const GalleryItemForm = ({
           <div className="input-wrapper">
             <CldUploadWidget
               uploadPreset="sportingkarate"
-              options={{
-                folder: "gallery",
-                resourceType: "auto",
-              }}
               onSuccess={(result: any, { widget }) => {
                 handleUpload(result);
                 widget.close();

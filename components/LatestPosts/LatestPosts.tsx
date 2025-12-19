@@ -15,7 +15,7 @@ const LatestPosts = ({ posts }: { posts: Post[] | null }) => {
   return (
     <div className="posts">
       <Title title="Nos derniers articles" />
-      <div className="posts__container">
+      <div className="posts__container posts__container--centered">
         {posts.map((post) => (
           <PostComponent key={post.id} post={post} />
         ))}

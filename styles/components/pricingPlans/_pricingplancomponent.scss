@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+    overflow: hidden;
 
     @include tablet-lg {
         min-width:320px;
@@ -44,9 +45,9 @@
     }
 
     &__separator {
-        background-image: linear-gradient(315deg, #bbffff, #FFFFFF);
-        height:1px;
-        width:100%;
+        background-image: linear-gradient(90deg, transparent, #009e9e 50%, transparent);
+        height: 2px;
+        width: 100%;
     }
 
     &__container__two {
@@ -89,13 +90,18 @@
         background-image: linear-gradient(315deg, #bbffff, #FFFFFF);
         outline: none;
         box-shadow: 0 3px 5px 0 #bb8a8a66;
-        transition: 0.3s;
-        will-change: transform; 
+        transition: all 0.2s ease;
+        position: relative;
 
         &:not(:disabled):hover {
-            box-shadow: 0 0 rgba(0, 0, 0, 0.4) !important;
-            border-bottom-width: 2px !important;
-            transform: translate3d(0px, 2px, 0px) !important;
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px 0 #bb8a8a66;
+            filter: brightness(0.98);
+        }
+
+        &:not(:disabled):active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 1px 0 #bb8a8a66;
         }
     }
 

@@ -59,10 +59,14 @@
     display: block;
     width: 100%;
     height: auto;
+    pointer-events: none; /* Permet au swipe de passer à travers l'image */
+    user-select: none;
   }
   .modal__video {
     width: 100%;
     height: auto;
+    pointer-events: none; /* Permet au swipe de passer à travers la vidéo */
+    user-select: none;
   }
 
   .modal__nav {

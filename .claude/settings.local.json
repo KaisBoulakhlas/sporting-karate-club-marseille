@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(find:*)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "WebSearch",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(lsof:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(npx prisma db seed:*)",
+      "Bash(netstat:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

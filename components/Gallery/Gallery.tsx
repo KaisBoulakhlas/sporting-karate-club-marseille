@@ -2,7 +2,7 @@
 import React from "react";
 import GalleryItem from "./GalleryItem";
 import Modal from "../UI/Modal";
-import useSlider from "@/hooks/useSlider";
+import { useCarousel } from "@/hooks/useCarousel";
 import { GalleryItemProps } from "@/types/types";
 
 interface GalleryProps {
@@ -10,13 +10,8 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ items }) => {
-  const {
-    currentIndex,
-    handlePrevClick,
-    handleNextClick,
-    currentItem,
-    setIndex,
-  } = useSlider(items, true);
+  const { currentItem, setIndex, handleNextClick, handlePrevClick } =
+    useCarousel({ items, allowNull: true, swipeThreshold: 75 });
 
   const handleOpenModal = (index: number) => {
     setIndex(index);

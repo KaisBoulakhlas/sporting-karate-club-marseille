@@ -10,14 +10,15 @@ import { Prisma } from "@prisma/client";
 const PostListPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const ITEM_PER_PAGE = 4;
+  const params = await searchParams;
 
   const { data, count, currentPage } =
     await getPaginatedItems<Prisma.PostWhereInput>({
       model: db.post,
-      searchParams,
+      searchParams: params,
       itemsPerPage: ITEM_PER_PAGE,
       searchField: "title",
     });

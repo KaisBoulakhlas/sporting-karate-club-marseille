@@ -160,11 +160,6 @@ const UserForm = ({
           <div className="input-wrapper">
             <CldUploadWidget
               uploadPreset="sportingkarate"
-              options={{
-                folder: "users",
-                resourceType: "image",
-                clientAllowedFormats: ["png", "jpeg", "jpg"],
-              }}
               onSuccess={(result: any, { widget }) => {
                 setImage(result.info?.secure_url);
                 widget.close();

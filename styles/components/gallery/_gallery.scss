@@ -11,6 +11,8 @@
     columns: 1;
     column-gap: 10px;
     padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
 
 
     @include phone-sm {
@@ -23,11 +25,11 @@
 
     .gallery__item {
         overflow: hidden;
-    
+
 
     img, video {
         width: 100%;
-        height: auto; 
+        height: auto;
         break-inside: avoid;
         padding:2.5px 0;
         transition:all 0.3s ease;
@@ -39,6 +41,113 @@
       }
     }
   }
+
+/* Gallery Modal */
+.gallery-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    pointer-events: none; /* Important: laisser passer les événements */
+  }
+
+  &__content {
+    position: relative;
+    width: 90%;
+    height: 80%;
+    max-width: 900px;
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 1001;
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    touch-action: none; /* IMPORTANT: pour les événements tactiles */
+  }
+
+  &__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    will-change: transform; /* Performance */
+
+    img, video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none; /* Évite les interactions avec l'image */
+      user-select: none;
+    }
+  }
+
+  &__close,
+  &__prev,
+  &__next {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+    z-index: 1002;
+    user-select: none;
+
+    &:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__close {
+    top: 10px;
+    right: 10px;
+  }
+
+  &__prev {
+    left: 10px;
+  }
+
+  &__next {
+    right: 10px;
+  }
+}
   
 
 

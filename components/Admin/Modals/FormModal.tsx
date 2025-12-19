@@ -63,7 +63,19 @@ const FormModal: React.FC<FormModalProps> = ({ table, type, data }) => {
       }
 
       setIsOpen(false);
-      router.refresh();
+
+      // Get current page from URL
+      const params = new URLSearchParams(window.location.search);
+      const currentPage = parseInt(params.get("page") || "1");
+
+      // Check if we need to go back to previous page
+      // This will happen after deletion when the current page might be empty
+      if (currentPage > 1) {
+        // Go back to previous page first, then let router.refresh handle showing correct data
+        router.push(`${window.location.pathname}?page=${currentPage - 1}`);
+      } else {
+        router.refresh();
+      }
     } catch (error) {
       setIsOpen(false);
       console.error("Erreur lors de la suppression :", error);

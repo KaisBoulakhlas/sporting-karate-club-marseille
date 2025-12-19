@@ -1,24 +1,19 @@
-import Gallery from "@/components/Gallery/Gallery";
 import Title from "@/components/UI/Title";
-import { db } from "@/lib/db";
 import { Metadata } from "next";
-import React from "react";
+import { GalleryContainer } from "@/components/Gallery/GalleryContainer";
 
 export const metadata: Metadata = {
-  title: "Gallerie",
+  title: "Galerie",
   description: "Notre gallerie de photos/vidéos du club.",
 };
 
-const GalleryPage = async () => {
-  const items = await db.galleryItem.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+export const revalidate = false;
+
+export default function GalleryPage() {
   return (
     <main className="galleryContainer">
-      <Title title="Notre gallerie" />
-      <Gallery items={items} />
+      <Title title="Notre galerie" />
+      <GalleryContainer />
     </main>
   );
-};
-
-export default GalleryPage;
+}

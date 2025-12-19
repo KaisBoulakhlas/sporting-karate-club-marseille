@@ -1,13 +1,28 @@
 .posts {
     @extend %container;
-    gap:2rem;
-    flex-direction:column;
-    
+    gap: 3.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 3rem 1.5rem;
+
+    @include tablet-lg {
+      padding: 4rem 2rem;
+    }
+
+    @include desktop-xl {
+      padding: 5rem 3rem;
+    }
 
     &__container {
-        @extend %flexbox;
-        gap:2rem;
-        margin-bottom:3rem;
-        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 3rem;
+        margin-bottom: 3rem;
+        width: 100%;
+
+        &--centered {
+            justify-content: center;
+        }
     }
 }

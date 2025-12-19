@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/Login/LoginForm";
+import { LoginProtection } from "@/components/Auth/LoginProtection";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <Suspense>
-      <main className="login">
-        <LoginForm />
-      </main>
-    </Suspense>
+    <LoginProtection>
+      <Suspense>
+        <main className="login">
+          <LoginForm />
+        </main>
+      </Suspense>
+    </LoginProtection>
   );
 }

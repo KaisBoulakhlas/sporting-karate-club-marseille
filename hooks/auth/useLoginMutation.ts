@@ -33,13 +33,26 @@ export function useLoginMutation() {
       }
 
       if (response.data?.user) {
-        const user = response.data.user as any;
-        // Redirect based on user role
-        const redirectUrl =
-          user?.role === "ADHERENT" ? "/" : "/back-office";
+        let user = response.data.user as any;
 
-        router.push(redirectUrl);
-        router.refresh();
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        try {
+          const sessionResponse = await fetch("/api/auth/get-session");
+          if (sessionResponse.ok) {
+            const sessionData = await sessionResponse.json();
+            if (sessionData?.user?.role) {
+              user = sessionData.user;
+            }
+          }
+        } catch (e) {
+        }
+
+        if (user?.role === "ADHERENT") {
+          window.location.href = "/";
+        } else {
+          router.replace("/back-office");
+        }
 
         return {
           user: user as User,

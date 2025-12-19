@@ -11,14 +11,15 @@ import Image from "next/image";
 const GalleryListPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const ITEM_PER_PAGE = 4;
+  const params = await searchParams;
 
   const { data, count, currentPage } =
     await getPaginatedItems<Prisma.GalleryItemWhereInput>({
       model: db.galleryItem,
-      searchParams,
+      searchParams: params,
       itemsPerPage: ITEM_PER_PAGE,
       searchField: "title",
     });
