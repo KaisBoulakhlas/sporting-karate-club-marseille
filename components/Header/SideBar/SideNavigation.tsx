@@ -26,7 +26,7 @@ const SideNavigation = ({ closeSidebar }: { closeSidebar: () => void }) => {
 
   const links = [
     { title: "Blog", link: "/blog", visible: [] },
-    { title: "Gallerie", link: "/gallerie", visible: [] },
+    { title: "Gallerie", link: "/galerie", visible: [] },
     { title: "Cours", link: "/cours", visible: [] },
     { title: "Contact", link: "/contact", visible: [] },
     ...(isAuthenticated
