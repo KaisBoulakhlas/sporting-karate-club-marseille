@@ -79,10 +79,9 @@ async function main() {
         await db.account.create({
           data: {
             userId: user.id,
-            type: "credentials",
-            provider: "credential",
-            providerAccountId: testUser.email,
-            access_token: hashedPassword,
+            accountId: testUser.email,
+            providerId: "credential",
+            password: hashedPassword,
           },
         });
 

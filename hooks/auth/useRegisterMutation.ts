@@ -42,7 +42,7 @@ export function useRegisterMutation() {
         router.replace("/");
 
         return {
-          user: response.data.user as User,
+          user: response.data.user as unknown as User,
           message: "Inscription réussie",
         };
       }
